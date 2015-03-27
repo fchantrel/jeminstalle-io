@@ -5,19 +5,19 @@ import java.util.Collection;
 import io.jeminstalle.domain.Lieu;
 
 /**
- * The Interface LieuDao.
+ * Interface LieuDao.
  */
 public interface LieuDao {
 	
 	/**
-	 * Gets all Lieux.
+	 * Recupere les Lieux.
 	 *
 	 * @return all Lieux
 	 */
 	public Collection<Lieu> getAllLieux();
 	
 	/**
-	 * Gets the Lieu by id.
+	 * Recupere un Lieu par son id.
 	 *
 	 * @param id the id
 	 * @return the Lieu by id
@@ -25,15 +25,15 @@ public interface LieuDao {
 	public Lieu getLieuById(Long id);
 	
 	/**
-	 * Find Lieux by nom.
+	 * Recupere un Lieu par son nom.
 	 *
-	 * @param author the author
+	 * @param nom the nom
 	 * @return the collection of Lieux found
 	 */
-	public Collection<Lieu> findLieuxByNom(String author);
+	public Collection<Lieu> findLieuxByNom(String nom);
 	
 	/**
-	 * Adds the Lieu.
+	 * Ajoute un Lieu.
 	 *
 	 * @param newLieu the new Lieu
 	 * @return the Lieu added
@@ -41,7 +41,7 @@ public interface LieuDao {
 	public Lieu addLieu(Lieu newLieu);
 	
 	/**
-	 * Delete Lieu.
+	 * Supprime un Lieu.
 	 *
 	 * @param LieuId the Lieu id
 	 */

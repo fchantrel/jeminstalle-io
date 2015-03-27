@@ -1,7 +1,7 @@
 package io.jeminstalle.domain;
 
 /**
- * The Class Lieu.
+ * Classe Lieu.
  *
  * @author fchantrel
  */

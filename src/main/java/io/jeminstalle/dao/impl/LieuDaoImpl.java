@@ -10,7 +10,7 @@ import io.jeminstalle.dao.LieuDao;
 import io.jeminstalle.domain.Lieu;
 
 /**
- * The Class LieuDaoImpl.
+ * Classe LieuDaoImpl.
  */
 @Repository("LieuDao")
 public class LieuDaoImpl implements LieuDao {
@@ -19,7 +19,7 @@ public class LieuDaoImpl implements LieuDao {
 	private List<Lieu> library;
 	
 	/**
-	 * Instantiates a new Lieu dao impl.
+	 * Instantiates a new LieuDaoImpl.
 	 */
 	public LieuDaoImpl() {
 		this.library = new ArrayList<>();
@@ -66,7 +66,6 @@ public class LieuDaoImpl implements LieuDao {
 		
 		for (Lieu Lieu : this.library) {
 			
-			//TODO: put in lowercase
 			if (Lieu.getLibelle().equals(nom)) {
 				result.add(Lieu);
 			}

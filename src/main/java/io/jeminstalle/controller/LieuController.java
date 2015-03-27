@@ -15,18 +15,18 @@ import io.jeminstalle.domain.Lieu;
 import io.jeminstalle.service.LieuService;
 
 /**
- * The Class LieuController.
+ * Classe LieuController.
  */
 @RestController("LieuController")
 @RequestMapping(value = "/lieux")
 public class LieuController {
 
-	/** The Lieu service. */
+	/** le service LieuService. */
 	@Autowired
 	private LieuService LieuService;
 	
 	/**
-	 * Gets the all Lieux.
+	 * Recupere tous les Lieux.
 	 *
 	 * @return the all Lieux
 	 */
@@ -36,7 +36,7 @@ public class LieuController {
 	}
 	
 	/**
-	 * Gets the Lieu by id.
+	 * Recupere un Lieu par son id.
 	 *
 	 * @param id the id
 	 * @return the Lieu by id
@@ -47,7 +47,7 @@ public class LieuController {
 	}
 	
 	/**
-	 * Find Lieux by nom de ville.
+	 * Recherche texte de Lieu de type ville.
 	 *
 	 * @param nomVille 
 	 * @return the collection
@@ -58,7 +58,7 @@ public class LieuController {
 	}
 	
 	/**
-	 * Adds the Lieu.
+	 * Ajoute un Lieu.
 	 *
 	 * @param Lieu the Lieu
 	 * @return the Lieu
@@ -69,7 +69,7 @@ public class LieuController {
 	}
 
 	/**
-	 * Delete Lieu.
+	 * Supprime un Lieu.
 	 *
 	 * @param id the id
 	 * @return the response entity
@@ -90,7 +90,7 @@ public class LieuController {
 	
 
 	/**
-	 * Gets the Lieu service.
+	 * Gets LieuService.
 	 *
 	 * @return the Lieu service
 	 */
@@ -99,7 +99,7 @@ public class LieuController {
 	}
 
 	/**
-	 * Sets the Lieu service.
+	 * Sets LieuService.
 	 *
 	 * @param LieuService the new Lieu service
 	 */

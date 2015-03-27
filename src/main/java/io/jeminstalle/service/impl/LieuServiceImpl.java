@@ -10,7 +10,7 @@ import io.jeminstalle.domain.Lieu;
 import io.jeminstalle.service.LieuService;
 
 /**
- * The Class LieuServiceImpl.
+ * Classe LieuServiceImpl.
  */
 @Service("lieuService")
 public class LieuServiceImpl implements LieuService {
@@ -81,7 +81,7 @@ public class LieuServiceImpl implements LieuService {
 	 *
 	 * @param LieuDao the new Lieu dao
 	 */
-	public void setLieuDao(LieuDao LieuDao) {
+	public void setLieuDao(LieuDao lieuDao) {
 		this.lieuDao = lieuDao;
 	}
 
