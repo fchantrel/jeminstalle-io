@@ -12,4 +12,8 @@ To start the application with the embeded server, go into the project location a
 If you want to compile the app, simply use ```mvn package``` as you would have done with any Maven project.
 
 The project uses Spring Loaded so any code change in an existing method will not require app reboot.
+
+## POC CARTO
+
+_Leaflet_ + _GEOJSON_ ==> [ici](./poc-carto/README.md)
 ~                                                                                                      
