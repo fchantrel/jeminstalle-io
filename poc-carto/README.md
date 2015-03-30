@@ -7,8 +7,8 @@
 
 - S'assurer d'avoir un ``node`` et un ``npm`` sur sa machine
 - ``> cd poc-carto``
-- ``> npm insall``
-- ``> node app.js`` pour ceux qui sont allergiques à coffee, sinon ``> coffee app.coffee``
+- ``> npm install``
+- ``> node app.js`` pour ceux qui sont allergiques à _coffee_, sinon ``> coffee app.coffee``
 
 # Accéder au poc
 
