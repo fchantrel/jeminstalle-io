@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @RestController("RefGeoController")
 @RequestMapping(value = "/refgeo")
@@ -17,9 +19,9 @@ public class RefGeoController {
     private RefGeoService refGeoService;
 
 
-    @RequestMapping(value = "/{communeName}", method = RequestMethod.GET)
-    public RefGeo getRefGeoByCommuneName(@PathVariable("communeName") String communeName) {
-        return refGeoService.getRefGeoByCommuneName(communeName);
+    @RequestMapping(value = "/{name}", method = RequestMethod.GET)
+    public List<RefGeo> getRefGeoByName(@PathVariable("name") String name) {
+        return refGeoService.getRefGeoByName(name);
     }
 
 }
