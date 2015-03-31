@@ -1,5 +1,8 @@
 package io.jeminstalle.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DataParticulier {
 
     private RefGeo refGeo;
@@ -8,6 +11,11 @@ public class DataParticulier {
     private RevenuMoyen revenuMoyen;
     private Precipitation precipitation;
     private Nucleaire nucleaire;
+
+    private List<Pro> pharmacies = new ArrayList<>();
+    private List<Pro> boulangeries = new ArrayList<>();
+    private List<Pro> ecoles = new ArrayList<>();
+    private List<Pro> bars = new ArrayList<>();
 
     public RefGeo getRefGeo() {
         return refGeo;
@@ -56,6 +64,37 @@ public class DataParticulier {
 
     public void setRevenuMoyen(RevenuMoyen revenuMoyen) {
         this.revenuMoyen = revenuMoyen;
+    }
 
+    public List<Pro> getPharmacies() {
+        return pharmacies;
+    }
+
+    public void setPharmacies(List<Pro> pharmacies) {
+        this.pharmacies = pharmacies;
+    }
+
+    public List<Pro> getBoulangeries() {
+        return boulangeries;
+    }
+
+    public void setBoulangeries(List<Pro> boulangeries) {
+        this.boulangeries = boulangeries;
+    }
+
+    public List<Pro> getEcoles() {
+        return ecoles;
+    }
+
+    public void setEcoles(List<Pro> ecoles) {
+        this.ecoles = ecoles;
+    }
+
+    public List<Pro> getBars() {
+        return bars;
+    }
+
+    public void setBars(List<Pro> bars) {
+        this.bars = bars;
     }
 }
