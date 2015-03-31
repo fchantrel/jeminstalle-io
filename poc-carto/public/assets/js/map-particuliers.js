@@ -1,28 +1,6 @@
+//------------------------------------------------------
+// Définition du Centrage de la carte (FRANCE)
 var map = L.map('map').setView([47.07, 2.37], 6);
-
-//------------------------------------------------------
-// Définition des ICONES
-var LeafIcon = L.Icon.extend({
-    options: {
-        shadowUrl: '../docs/images/leaf-shadow.png',
-        iconSize:     [38, 95],
-        shadowSize:   [50, 64],
-        iconAnchor:   [22, 94],
-        shadowAnchor: [4, 62],
-        popupAnchor:  [-3, -76]
-    }
-});
-
-// var greenIcon = new LeafIcon({iconUrl: '../docs/images/leaf-green.png'}),
-    // redIcon = new LeafIcon({iconUrl: '../docs/images/leaf-red.png'}),
-    // orangeIcon = new LeafIcon({iconUrl: '../docs/images/leaf-orange.png'});
-
-// L.marker([47.02, 2.3], {icon: greenIcon}).bindPopup("I am a green leaf.").addTo(map);
-// L.marker([47.08, 2.47], {icon: redIcon}).bindPopup("I am a red leaf.").addTo(map);
-// L.marker([47.18, 2.27], {icon: orangeIcon}).bindPopup("I am an orange leaf.").addTo(map);
-//------------------------------------------------------
-
-
 
 //------------------------------------------------------
 // Définition du FOND DE CARTE
@@ -78,8 +56,8 @@ function showMapIcon( lat, lng, sType, sEtabName )
     L.marker([lat, lng], {icon: jeminstalleIO_Icon}).bindPopup(sEtabName).addTo(map);
 }
 //======================================================================================
-function displayActivitePoi(  sActiviteLib, oDatasActivite ) {
-
+function displayActivitePoi(  sActiviteLib, oDatasActivite )
+{
     var aEtablissements = oDatasActivite.hits.hits;
 
     // console.log('aEtablissements : '+aEtablissements[0]._index);
@@ -91,11 +69,9 @@ function displayActivitePoi(  sActiviteLib, oDatasActivite ) {
         var sEtabName = oEtab._source.intlprincipal;
         var lat = oEtab._source.proGeoCoord.lat;
         var lon = oEtab._source.proGeoCoord.lon;
-        //console.log('sEtabName : '+sEtabName+' - lat : '+lat+' lon : '+lon+' - sActiviteLib : '+sActiviteLib);
+        console.log('sEtabName : '+sEtabName+' - lat : '+lat+' lon : '+lon+' - sActiviteLib : '+sActiviteLib);
         showMapIcon( lat, lon, sActiviteLib, sEtabName );
     }
-
-
 }
 
 //======================================================================================
