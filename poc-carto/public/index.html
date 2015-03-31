@@ -1,0 +1,85 @@
+<!doctype html>
+<!--[if lte IE 7]> <html class="no-js ie67 ie678" lang="fr"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8 ie678" lang="fr"> <![endif]-->
+<!--[if IE 9]> <html class="no-js ie9" lang="fr"> <![endif]-->
+<!--[if gt IE 9]> <!--><html class="no-js" lang="fr"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+    <title>jeminstalle.io</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- <link rel="stylesheet" href="assets/libs/bootstrap-3.3.4/css/bootstrap.css" media="all"> -->
+    <link rel="stylesheet" href="assets/css/styles.css" media="all">
+</head>
+<body>
+    <div id="page">
+
+        <header class="site-header">
+            <div class="container">
+                <h1 class="site-title">jeminstalle.io</h1>
+            </div>
+        </header> <!-- /END .site-header -->
+
+        <main class="content">
+
+            <section class="area-search">
+
+                <div class="form-container">
+                    <form id="searchForm" class="search-form" method="post" action="">
+                        <label for="search">Je m'installe....</label>
+                        <input type="search" id="search" class="search" name="search" autofocus value="" />
+                        <button type="submit" class="btn btn-default">Rechercher</button>
+                    </form>
+                </div> <!-- /END .form-container -->
+
+                <div class="map-container">
+                    <div id="map"></div>
+                </div> <!-- /END .map-container -->
+
+            </section> <!-- /END .area-search -->
+
+            <section class="area-result">
+
+                <div class="container">
+
+                    <table id="resultsTable" class="results-table">
+                        <thead>
+                            <tr>
+                                <td>Colonne 1</td>
+                                <td>Colonne 2</td>
+                                <td>Colonne 3</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Voici le contenu n°1</td>
+                                <td>Voici le contenu n°2</td>
+                                <td>Voici le contenu n°3</td>
+                            </tr>
+                        </tbody>
+                    </table> <!-- /END .results-table -->
+
+                </div> <!-- /END .container -->
+
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <small>&copy; jeminstalle.io - PagesJaunes</small>
+            </div>
+        </footer> <!-- /END .site-footer -->
+    </div>
+
+
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="assets/libs/bootstrap-3.3.4/js/bootstrap.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="assets/js/map.js"></script>
+</body>
+</html>

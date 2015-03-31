@@ -1,0 +1,84 @@
+/* 
+ * @filename    : variables.scss
+ * @description : Contient l'ensemble des variables du site
+ * @author      : Tresor ILOYI
+ * @date        : MARS 2015
+ * -------------------------------------------- */
+
+/*  
+ * =VARIABLES PAR DEFAUT
+ * -------------------------------------------- */
+
+/*  
+ * =COULEURS
+ * -------------------------------------------- */
+$white        : #ffffff;
+$black        : #000000;
+$gray-dark-1  : #2b2b2b;
+$gray-dark-2  : #303030;
+
+$gray-1       : #cbcbcb;
+$gray-2       : #e0e0e0;
+
+$gray-light-1 : #fafafa;
+$gray-light-2 : #eeeeee;
+$gray-light-3 : #777777;
+
+$yellow       : #ffeb00;
+
+
+/*  
+ * =POLICES
+ * -------------------------------------------- */
+@mixin arial {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@mixin opensans {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+@mixin font-size( $size: 1.6 ) {
+  font-size: ($size * 10) + px;
+  font-size: $size + rem;
+}
+
+
+/*  
+ * =LISTES
+ * -------------------------------------------- */
+@mixin reset-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+/*
+ * =POSITIONNEMENT
+ * ------------------------------------------- */
+@mixin inline-block( $valign: top ) {
+  display: inline-block;
+  vertical-align: $valign;
+}
+
+
+/*
+ * =MISC
+ * ------------------------------------------- */
+@mixin margin-auto ( $max-width: 960px ) {
+  margin: 0 auto;
+  max-width: $max-width;
+  width: 100%;
+}
+
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin hide {
+  position: absolute;
+  left: -999em;
+}

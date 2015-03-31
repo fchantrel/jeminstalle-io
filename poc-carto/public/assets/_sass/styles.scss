@@ -1,0 +1,19 @@
+/*
+ * @filename    : styles.scss
+ * @description : Contient l'ensemble des appels aux styles du site
+ * @author      : Tresor ILOYI
+ * @date        : MARS 2015
+ * -------------------------------------------- */
+
+// INIT
+@import "variables";
+
+// LIBS
+
+// STYLES GENERICS
+@import "global";
+@import "header";
+@import "footer";
+
+// STYLES SPECIFIQUES
+@import "main";

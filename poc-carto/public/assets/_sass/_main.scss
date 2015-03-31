@@ -1,0 +1,131 @@
+/*
+ * @filename    : main.scss
+ * @description : Styles des contenus
+ * @author      : Tresor ILOYI
+ * @date        : MARS 2015
+ * -------------------------------------------- */
+
+
+/*
+ * =GENERICS
+ * -------------------------------------------- */
+ .area-search {
+  position: relative;
+}
+
+
+/*
+ * =FORM
+ * -------------------------------------------- */
+ .form-container {
+    display: none;
+    position: absolute;
+    left: 50%;
+    margin: 0 0 0 -512px;
+    text-align: center;
+    top: 190px;
+    width: 1024px;
+
+    form {
+        position: relative;
+    }
+
+    label {
+        display: block;
+    @include font-size( 3.0 ); // =30px
+}
+
+input {
+    @include font-size( 2.0 ); // =20px
+    background: $white;
+    border: none;
+    margin: 0;
+    line-height: 60px;
+    padding: 0 20px;
+    width: 940px;
+}
+
+.btn {
+    @include font-size( 2.0 ); // =20px
+    background: $yellow;
+    border: none;
+    border-radius: 0;
+    bottom: 10px;
+    font-weight: bold;
+    position: absolute;
+    right: 48px;
+}
+}
+
+
+/*
+ * =MAP
+ * -------------------------------------------- */
+ .map-container {
+  background: #ede9dd;
+  min-height: 540px;
+
+
+    #map {
+        width: 100%; /*800px;*/
+        height: 600px; /*800px;*/
+    }
+
+
+}
+
+    .info {
+        padding: 6px 8px;
+        font: 14px/16px Arial, Helvetica, sans-serif;
+        background: white;
+        background: rgba(255,255,255,0.8);
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        border-radius: 5px;
+    }
+
+    .info h4 {
+        margin: 0 0 5px;
+        color: #777;
+    }
+
+/*
+ * =RESULTS
+ * -------------------------------------------- */
+ .area-result {
+  padding: 40px 0;
+
+  .container {
+    max-width: 970px;
+}
+}
+
+.results-table {
+  border: 1px solid $gray-1;
+  width: 100%;
+
+  td {
+    padding: 0 15px;
+    line-height: 40px;
+}
+
+thead {
+    @include font-size( 2.0 ); // =20px
+    font-weight: bold;
+
+    td {
+      background: $gray-2;
+      border: 1px solid $gray-1;
+      border-bottom: 0;
+  }
+}
+
+tbody {
+    @include font-size( 1.8 ); // =18px
+
+    td {
+      border: 1px solid $gray-1;
+      border-top: 0;
+  }
+}
+
+}
