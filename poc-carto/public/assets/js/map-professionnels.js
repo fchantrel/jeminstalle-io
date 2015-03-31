@@ -1,23 +1,27 @@
 var jsonBasePath = '../../';
+var springhost = '192.168.160.227';
+var datapro = 'http://'+springhost+':8080/datapro/';
+var ACTIVITE = 'activite';
+var OU = 'ou';
 
     //var map = L.map('map').setView([51.505, -0.09], 13);
 
     var map = L.map('map').setView([47.07, 2.37], 6);
 
     function getColor(d) {
-        return d > 10000000 ? '#800026' :
-            d > 5000000  ? '#BD0026' :
-            d > 4000000  ? '#E31A1C' :
-            d > 3000000  ? '#FC4E2A' :
-            d > 2000000   ? '#FD8D3C' :
-            d > 1000000   ? '#FEB24C' :
-            d > 500000   ? '#FED976' :
+        return d > 1 ? '#800026' :
+            d > 0.5  ? '#BD0026' :
+            d > 0.1  ? '#E31A1C' :
+            d > 0.05  ? '#FC4E2A' :
+            d > 0.01   ? '#FD8D3C' :
+            d > 0.005   ? '#FEB24C' :
+            d > 0.0001   ? '#FED976' :
                        '#FFEDA0';
     }
 
     function style(feature) {
         return {
-            fillColor: getColor(feature.properties.population),
+            fillColor: getColor(feature.properties.ratio),
             weight: 2,
             opacity: 1,
             color: 'white',
@@ -181,28 +185,44 @@ var jsonBasePath = '../../';
     /// callback est une fonction qui prend la data paramètre
 
     function enrichissementRegions(data, callback) {
-
-        // Ici un exemple ou on enrichit le json avec
-        // les données de population
-
-        $.getJSON( "./regions-population.json", function( population ) {
-            data.features.forEach( function (o) {
-                // Enrichissement du geojson avec les données de population
-                //console.log(population[o.properties.code]);
-                o.properties.population = population[o.properties.code];
-            });
-            callback(data);
-        });
+        enrichissement(data, callback);
     }
 
     function enrichissementDepartements(data, callback) {
-        // TODO avec les bonnes données.
-        callback(data);
+        enrichissement(data, callback);
     }
 
     function enrichissementCommunes(data, callback) {
-        // TODO avec les bonnes données.
-        callback(data);
+        enrichissement(data, callback);
+    }
+
+    function enrichissement(data, callback) {
+
+        // Ici un exemple ou on enrichit le json avec
+        // les données de population et le ratio pour la carte
+
+        var nb = data.features.length;
+        var current = 0;
+
+        var finish = function() {
+            current++;
+            if(nb == current) {
+                callback(data);
+            }
+        }
+        
+        data.features.forEach( function (o) {
+            $.getJSON(datapro,
+                {
+                    activite: "pompe funebre",
+                    ou: o.properties.code
+                }, function(resultat) {
+                console.log(resultat);
+                o.properties.ratio = resultat.ratio;
+                o.properties.population = resultat.population;
+                finish();
+            });
+        });
     }
 
     /// ================================= FIN ENRICHISSEMENTS DONNEES =========================
