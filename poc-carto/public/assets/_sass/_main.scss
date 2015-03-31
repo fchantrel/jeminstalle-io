@@ -18,7 +18,6 @@
  * =FORM
  * -------------------------------------------- */
  .form-container {
-    display: none;
     position: absolute;
     left: 50%;
     margin: 0 0 0 -512px;
@@ -32,29 +31,29 @@
 
     label {
         display: block;
-        @include font-size( 3.0 ); // =30px
+        @include font-size( 3 );
     }
 
-input {
-    @include font-size( 2.0 ); // =20px
-    background: $white;
-    border: none;
-    margin: 0;
-    line-height: 60px;
-    padding: 0 20px;
-    width: 940px;
-}
+    input {
+        @include font-size( 2 );
+        background: $white;
+        border: none;
+        margin: 0;
+        line-height: 60px;
+        padding: 0 20px;
+        width: 940px;
+    }
 
-.btn {
-    @include font-size( 2.0 ); // =20px
-    background: $yellow;
-    border: none;
-    border-radius: 0;
-    bottom: 10px;
-    font-weight: bold;
-    position: absolute;
-    right: 48px;
-}
+    .btn {
+        @include font-size( 2 );
+        background: $yellow;
+        border: none;
+        border-radius: 0;
+        bottom: 10px;
+        font-weight: bold;
+        position: absolute;
+        right: 48px;
+    }
 }
 
 
@@ -63,9 +62,9 @@ input {
  * -------------------------------------------- */
  #map {
     background: #ede9dd;
-    min-height: 540px;
-    width: 100%; /*800px;*/
-    height: 600px; /*800px;*/
+    width: 100%;
+    height: 600px;
+    // min-height: 540px;
 }
 
 .info {
@@ -86,40 +85,42 @@ input {
  * =RESULTS
  * -------------------------------------------- */
  .area-result {
-  padding: 40px 0;
+    position: relative;
+    padding: 0px;
+    margin-top: -150px;
+    z-index: 1000;
 
-  .container {
-    max-width: 970px;
-}
-}
+    .container {
+        max-width: 970px;
+        // display: table;
 
-.results-table {
-  border: 1px solid $gray-1;
-  width: 100%;
+        .bloc {
+            background: $white;
+            display: inline-block;
+            vertical-align: top;
+            height: 150px;
+            width:31%;
+            margin: 10px 3% 10px  0;
+            padding: 15px;
 
-  td {
-    padding: 0 15px;
-    line-height: 40px;
-}
+            // border:1px solid $gray-light-1;
+            border:1px solid $gray-dark-1;
 
-thead {
-    @include font-size( 2.0 ); // =20px
-    font-weight: bold;
+            @include materialDesignBox();
 
-    td {
-      background: $gray-2;
-      border: 1px solid $gray-1;
-      border-bottom: 0;
-  }
-}
+            &.fullwidth {
+                width: 100%;
+                margin-right: 0;
+            }
 
-tbody {
-    @include font-size( 1.8 ); // =18px
+            &.no-bdr-right {
+                margin-right: 0;
+            }
 
-    td {
-      border: 1px solid $gray-1;
-      border-top: 0;
-  }
-}
+            > .bloc-title {
+                margin: 0 0 .5rem 0;
+            }
+        }
 
+    }
 }
