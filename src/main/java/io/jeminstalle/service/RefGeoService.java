@@ -2,8 +2,6 @@ package io.jeminstalle.service;
 
 import io.jeminstalle.domain.RefGeo;
 
-import java.util.List;
-
 /**
  * The Interface RefGeoService.
  */
@@ -15,7 +13,7 @@ public interface RefGeoService {
      * @param communeName le nom de la commune
      * @return la ref geo
      */
-    public List<RefGeo> getRefGeoByName(String communeName);
+    RefGeo getRefGeoByName(String communeName);
 
 
 }

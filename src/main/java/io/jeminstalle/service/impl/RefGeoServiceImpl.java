@@ -6,8 +6,6 @@ import io.jeminstalle.service.RefGeoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * Created by raphael on 31/03/2015.
  */
@@ -18,9 +16,7 @@ public class RefGeoServiceImpl implements RefGeoService {
     private RefGeoDao refGeoDao;
 
     @Override
-    public List<RefGeo> getRefGeoByName(String name) {
-
-        List<RefGeo> refGeo = refGeoDao.findByName(name);
-        return refGeo;
+    public RefGeo getRefGeoByName(String name) {
+        return refGeoDao.findByName(name).get(0);
     }
 }

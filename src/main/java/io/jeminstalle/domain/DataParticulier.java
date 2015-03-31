@@ -1,18 +1,23 @@
 package io.jeminstalle.domain;
 
 public class DataParticulier {
-	private Lieu lieu;
-	private Polution polution;
-	public Lieu getLieu() {
-		return lieu;
-	}
-	public void setLieu(Lieu lieu) {
-		this.lieu = lieu;
-	}
-	public Polution getPolution() {
-		return polution;
-	}
-	public void setPolution(Polution polution) {
-		this.polution = polution;
-	}
+
+    private RefGeo refGeo;
+    private Pollution pollution;
+
+    public RefGeo getRefGeo() {
+        return refGeo;
+    }
+
+    public void setRefGeo(RefGeo refGeo) {
+        this.refGeo = refGeo;
+    }
+
+    public Pollution getPollution() {
+        return pollution;
+    }
+
+    public void setPollution(Pollution pollution) {
+        this.pollution = pollution;
+    }
 }

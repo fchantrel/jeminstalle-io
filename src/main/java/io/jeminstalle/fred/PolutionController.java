@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import io.jeminstalle.dao.PolutionDAO;
-import io.jeminstalle.domain.Polution;
+import io.jeminstalle.domain.Pollution;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -26,17 +26,17 @@ public class PolutionController {
      * @return the all Polution
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Collection<Polution> getAllLieux() {
+    public Collection<Pollution> getAllLieux() {
     	
     	System.out.println("Polutions found with findAll():");
     	System.out.println("-------------------------------");
-    	for (Polution polution : this.repository.findAll()) {
-    	System.out.println(polution);
+    	for (Pollution pollution : this.repository.findAll()) {
+    	System.out.println(pollution);
     	}
     	System.out.println();
     	
-    	List<Polution> retour = new ArrayList<Polution>();
-    	retour.add(new Polution());
+    	List<Pollution> retour = new ArrayList<Pollution>();
+    	retour.add(new Pollution());
     	
     	return retour;
     }
