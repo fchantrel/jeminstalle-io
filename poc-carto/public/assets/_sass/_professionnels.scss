@@ -1,3 +1,23 @@
 #professionnels {
+  
+  // FORMULAIRE DE RECHERCHE
+  #searchForm {
+    .btn-submit {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+  .actions {
+    margin-top: 4px;
+  }
+  
+  #compareForm {
+    .btn-submit {
+      line-height: 36px;
+      margin-left: 5px;
+    }
+  }
+  
 
 }//#professionnels
