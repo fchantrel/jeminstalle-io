@@ -1,1 +1,22 @@
-{"refGeo":{"timestamp":null,"id_geozone":"rHKVtIdjRfaaswemypeLsw","name":"Rennes","zone_type":"city","zipcode":"35000","population":209613,"density":4160.0,"latitude":48.114723,"longitude":-1.679444,"inseecode":"35238","surface":50.39},"pollution":{"id":"uDx2lelYRo2RX4ihLsgYtA","classement":"29","nodepartement":"35","libelledepartement":"Ille-et-Vilaine","nbsitespolues":12}}
+{
+  "refGeo": {
+    "timestamp": null,
+    "id_geozone": "rHKVtIdjRfaaswemypeLsw",
+    "name": "Rennes",
+    "zone_type": "city",
+    "zipcode": "35000",
+    "population": 209613,
+    "density": 4160.0,
+    "latitude": 48.114723,
+    "longitude": -1.679444,
+    "inseecode": "35238",
+    "surface": 50.39
+  },
+  "pollution": {
+    "id": "uDx2lelYRo2RX4ihLsgYtA",
+    "classement": "29",
+    "nodepartement": "35",
+    "libelledepartement": "Ille-et-Vilaine",
+    "nbsitespolues": 12
+  }
+}
