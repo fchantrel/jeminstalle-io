@@ -45,7 +45,7 @@ output {
     index => "jeminstalle"
     index_type => "revenu_moyen"
     cluster => "cluster-dev-fch-1.4.4"
-  #}
+  }
 
   stdout { 
       codec => rubydebug
