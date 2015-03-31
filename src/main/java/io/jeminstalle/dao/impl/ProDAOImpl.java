@@ -13,13 +13,13 @@ public class ProDAOImpl implements ProDAO {
     private RestTemplate restTemplate = new RestTemplate();
 
     @Override
-    public String findByCoordonneesAndRubrique(String latitude, String longitude, String rubrique) {
+    public String findByCoordonneesAndRubrique(String latitude, String longitude, String rubrique, String distanceKM, String maxResultat) {
 
-        String s = "{ \"query\": { \"multi_match\": { \"query\": \"restaurant\", \"fields\": [ \"epj.denom\", \"parutions.parutionrubriques.rubrique.content^10\"] } }, \"filter\": { \"geo_distance\" : { \"distance\" : \"12km\", \"proGeoCoord\" : { \"lat\" : 48.86, \"lon\" : 2.27 } } } } ";
-        String retour = restTemplate.getForObject("http://192.168.160.227:9200/slev8epj/blocsepj/_search?size=1", String.class, s);
 
-        System.out.println(retour);
+        // FIXME : Refaire le query en priorisant les coordonnées !!
 
-        return "";
+        String s = "{ \"query\": { \"multi_match\": { \"query\": \"" + rubrique + "\", \"fields\": [ \"epj.denom\", \"parutions.parutionrubriques.rubrique.content^10\"] } }, \"filter\": { \"geo_distance\" : { \"distance\" : \"" + distanceKM + "km\", \"proGeoCoord\" : { \"lat\" : " + latitude + ", \"lon\" : " + longitude + " } } } } ";
+        String retour = restTemplate.getForObject("http://192.168.160.227:9200/slev8epj/blocsepj/_search?size=" + maxResultat, String.class, s);
+        return retour;
     }
 }
