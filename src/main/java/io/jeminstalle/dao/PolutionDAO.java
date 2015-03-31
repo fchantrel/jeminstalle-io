@@ -1,12 +1,12 @@
 package io.jeminstalle.dao;
 
-import io.jeminstalle.domain.Polution;
+import io.jeminstalle.domain.Pollution;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 import java.util.List;
 
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+public interface PolutionDAO extends ElasticsearchRepository<Pollution, String> {
 
-public interface PolutionDAO extends
-		ElasticsearchRepository<Polution, String> {
-	public List<Polution> findByNoDepartement(String noDepartement);
+    List<Pollution> findByNodepartement(String nodepartement);
+
 }
