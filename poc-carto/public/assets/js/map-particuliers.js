@@ -13,13 +13,13 @@ var LeafIcon = L.Icon.extend({
     }
 });
 
-var greenIcon = new LeafIcon({iconUrl: '../docs/images/leaf-green.png'}),
-    redIcon = new LeafIcon({iconUrl: '../docs/images/leaf-red.png'}),
-    orangeIcon = new LeafIcon({iconUrl: '../docs/images/leaf-orange.png'});
+// var greenIcon = new LeafIcon({iconUrl: '../docs/images/leaf-green.png'}),
+    // redIcon = new LeafIcon({iconUrl: '../docs/images/leaf-red.png'}),
+    // orangeIcon = new LeafIcon({iconUrl: '../docs/images/leaf-orange.png'});
 
-L.marker([47.02, 2.3], {icon: greenIcon}).bindPopup("I am a green leaf.").addTo(map);
-L.marker([47.08, 2.47], {icon: redIcon}).bindPopup("I am a red leaf.").addTo(map);
-L.marker([47.18, 2.27], {icon: orangeIcon}).bindPopup("I am an orange leaf.").addTo(map);
+// L.marker([47.02, 2.3], {icon: greenIcon}).bindPopup("I am a green leaf.").addTo(map);
+// L.marker([47.08, 2.47], {icon: redIcon}).bindPopup("I am a red leaf.").addTo(map);
+// L.marker([47.18, 2.27], {icon: orangeIcon}).bindPopup("I am an orange leaf.").addTo(map);
 //------------------------------------------------------
 
 
@@ -33,6 +33,48 @@ L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
             'Imagery © <a href="http://mapbox.com">Mapbox</a>',
         id: 'examples.map-20v6611k'
     }).addTo(map);
+
+//======================================================================================
+
+function showMapIcon( lat, lng, sType )
+{
+    var LeafIcon = L.Icon.extend({
+        options: {
+            // shadowUrl: '../docs/images/leaf-shadow.png',
+            iconSize:     [32, 32],
+            shadowSize:   [32, 32],
+            // iconAnchor:   [22, 94],
+            // shadowAnchor: [4, 62],
+            popupAnchor:  [-3, -76]
+        }
+    });
+
+    switch( sType )
+    {
+        case 'boulangerie':
+            sImage = 'boulangerie.png';
+            break;
+        case 'medecin':
+            sImage = 'Medecin1.png';
+            break;
+        case 'pharmacie':
+            sImage = 'pharmacie1.png';
+            break;
+        case 'ecole':
+            sImage = 'ecole.png';
+            break;
+        case 'bar':
+            sImage = 'ecole.png';
+            break;
+
+    }
+
+    var jeminstalleIO_Icon = new LeafIcon({iconUrl: '../docs/img/'+sImage}),
+
+    L.marker([lat, lng], {icon: jeminstalleIO_Icon})
+        .addTo(map);
+        // .bindPopup("I am a green leaf.")
+}
 
 //======================================================================================
 // AFFICHAGE DES DONNEES SUR L'INTERFACE
@@ -57,14 +99,12 @@ function updateMap(  oRefGeo ){
 }
 
 // Affichage du nombre de sites pollués
-function displayPollution(   oDatasPollution ){
-    var iClassmt = oDatasPollution.classement / 100;
-    // if( iClassmt > 1 ) {
-    // }
-    // else{
-    // }
-    $("#nbSitesPollues").attr("class", iClassmt );
-    $("#nbSitesPollues").find('span.value').html( ' : '+oDatasPollution.nbsitespolues );
+function displayPollution(   oDatasPollution ) {
+    var iClassmt = oDatasPollution.classement;
+    var sNiveau = 'niveau-'+ Math.ceil( iClassmt/20 );
+    $("#nbSitesPollues")
+        .attr("class", sNiveau )
+        .find('span.value').html( ' : '+oDatasPollution.nbsitespolues );
 }
 
 //======================================================================================

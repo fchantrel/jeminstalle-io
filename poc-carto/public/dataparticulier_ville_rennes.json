@@ -18,5 +18,70 @@
     "nodepartement": "35",
     "libelledepartement": "Ille-et-Vilaine",
     "nbsitespolues": 12
-  }
+  },
+  "couverture4G": {
+    "id": "HmkJ5k-gSIO4x7Qtp9qOaw",
+    "codedepartement": "35",
+    "coderegion": "53",
+    "couvbouygues": "0.71",
+    "couvorange": "0.62",
+    "couvfree": "0.15",
+    "couvsfr": "0.26",
+    "surfbouygues": "0.41",
+    "surforange": "0.31",
+    "surffree": "0.02",
+    "surfsfr": "0.03"
+  },
+  "revenuMoyen": {
+    "id": "tsib30dOT6qUcXnOJI9yLQ",
+    "classement": "22228",
+    "codeinsee": "35238",
+    "nomcommune": "Rennes",
+    "revenu": "24115"
+  },
+  "precipitation": {
+    "id": "QIcUDmMfQ3ajLlzf5zIyjg",
+    "classement": "34",
+    "precipitation": "1184322141",
+    "libelledepartement": "Ille-et-Vilaine",
+    "nodepartement": "35"
+  },
+  "nucleaire": {
+    "id": "_fH35fUYQzez3pMRZ0jpnw",
+    "libelledepartement": "Ille-et-Vilaine",
+    "nbcentrale": "0",
+    "numdep": "35"
+  },
+  "pharmacies": [
+    {
+      "denomination": "super pharmacie",
+      "longitude": "-1.789444",
+      "latitude": "48.224723",
+      "epj": "3385767"
+    }
+  ],
+  "boulangeries": [
+    {
+      "denomination": "super boulangerie",
+      "longitude": "-1.689444",
+      "latitude": "48.124723",
+      "epj": "5697348734"
+    }
+  ],
+  "ecoles": [
+    {
+      "denomination": "super pharmacie",
+      "longitude": "-1.689444",
+      "latitude": "48.324723",
+      "epj": "338995767"
+    }
+  ],
+  "bars": [
+    {
+      "denomination": "super bar",
+      "longitude": "-1.889444",
+      "latitude": "48.324723",
+      "epj": "111222"
+    }
+  ]
 }
