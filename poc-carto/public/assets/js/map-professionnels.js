@@ -1,12 +1,10 @@
 var jsonBasePath = '../../';
 var springhost = '192.168.160.227';
 var datapro = 'http://'+springhost+':8080/datapro/';
-var ACTIVITE = 'activite';
-var OU = 'ou';
 
-    //var map = L.map('map').setView([51.505, -0.09], 13);
+var activite;
 
-    var map = L.map('map').setView([47.07, 2.37], 6);
+var mapL;
 
     function getColor(d) {
         return d > 1 ? '#800026' :
@@ -16,7 +14,8 @@ var OU = 'ou';
             d > 0.01   ? '#FD8D3C' :
             d > 0.005   ? '#FEB24C' :
             d > 0.0001   ? '#FED976' :
-                       '#FFEDA0';
+            d > 0 ?          '#FFEDA0':
+                '#FFFFF0';
     }
 
     function style(feature) {
@@ -34,20 +33,36 @@ var OU = 'ou';
 
     var info = L.control();
 
-    info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-        this.update();
-        return this._div;
-    };
+    function initMap() {
 
-    // method that we will use to update the control based on feature properties passed
-    info.update = function (props) {
-        this._div.innerHTML = '<h4>Population de la zone</h4>' +  (props ?
-            '<b>' + props.nom + '</b><br />' + props.population + '.'
-            : 'Survolez une zone');
-    };
+        // ===== Les layers du début ========
 
-    info.addTo(map);
+        // Fond de carte
+
+        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            id: 'examples.map-20v6611k'
+        }).addTo(mapL);
+
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+            this.update();
+            return this._div;
+        };
+
+        // method that we will use to update the control based on feature properties passed
+        info.update = function (props) {
+            this._div.innerHTML = '<h4>Densité'+(activite.length>0 ? ' pour '+activite:' de la zone')+'</h4>' +  (props ?
+                '<b>' + props.nom + '</b><br />' + props.ratio + '.'
+                : 'Survolez une zone');
+        };
+
+        info.addTo(mapL);
+
+    }
 
     var geojson;
     var departementgeojson;
@@ -93,7 +108,7 @@ var OU = 'ou';
     }
 
     function zoomToFeature(e) {
-        map.fitBounds(e.target.getBounds());
+        mapL.fitBounds(e.target.getBounds());
         // Rajouter les départements
         var code = e.target.feature.properties.code;
         console.log(e.target);
@@ -102,12 +117,12 @@ var OU = 'ou';
         // Si je clique sur une region
         if(inLayer(e.target, geojson)) {
             // Si l'ancien layer departement existe, le supprimer
-            if(map.hasLayer(departementgeojson)) {
-                map.removeLayer(departementgeojson);
+            if(mapL.hasLayer(departementgeojson)) {
+                mapL.removeLayer(departementgeojson);
             }
             // Si l'ancien layer communes existe, le supprimer
-            if(map.hasLayer(communegeojson)) {
-                map.removeLayer(communegeojson);
+            if(mapL.hasLayer(communegeojson)) {
+                mapL.removeLayer(communegeojson);
             }
             // Rajouter le nouveau layer pour la region selectionnée
             $.getJSON( jsonBasePath+"regions/"+code+"/departements.geojson", function( data ) {
@@ -116,7 +131,7 @@ var OU = 'ou';
                     {
                         style: style,
                         onEachFeature: onEachFeature
-                     }).addTo(map);
+                     }).addTo(mapL);
                 });
             });
         }
@@ -124,8 +139,8 @@ var OU = 'ou';
         // Si je clique sur un département
         if(inLayer(e.target, departementgeojson)) {
             // Si l'ancien layer communes existe, le supprimer
-            if(map.hasLayer(communegeojson)) {
-                map.removeLayer(communegeojson);
+            if(mapL.hasLayer(communegeojson)) {
+                mapL.removeLayer(communegeojson);
             }
             // Rajouter le nouveau layer pour le département selectionné
             $.getJSON( jsonBasePath+"departements/"+code+"/communes.geojson", function( data ) {
@@ -134,7 +149,7 @@ var OU = 'ou';
                     {
                         style: style,
                         onEachFeature: onEachFeature
-                     }).addTo(map);
+                     }).addTo(mapL);
                 });
             });
         }
@@ -150,32 +165,38 @@ var OU = 'ou';
 
     // Fin des listeners
 
-    // ===== Les layers du début ========
-
-    // Fond de carte
-
-    L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-            maxZoom: 18,
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            id: 'examples.map-20v6611k'
-        }).addTo(map);
-
     // Chargement du geojson au niveau région
 
     $(document).ready(function() {
-        // console.log(jsonBasePath+"regions.geojson");
+        $('#searchForm').on('submit', function( e ) {
+            e.preventDefault();
+            refresh($('#search').val());
+        });
+ 
+        //refresh("pompes funebres");
+        refresh("");
+    });
+
+    /// =======================   refresh pour une activité donnée
+
+    function refresh(anActivite) {
+        activite = anActivite;
+        console.log(mapL);
+        if(mapL != null) {
+            mapL.remove();
+        }
+        mapL = L.map('map').setView([47.07, 2.37], 6);
+        initMap();
         $.getJSON( jsonBasePath+"regions.geojson", function( data ) {
             enrichissementRegions(data, function (d) {
                 geojson = L.geoJson(d,
                     {
                         style: style,
                         onEachFeature: onEachFeature
-                     }).addTo(map);
+                     }).addTo(mapL);
             });
         });
-    });
+    }
 
 
     /// ====================================== ENRICHISSEMENTS DONNEES =========================
@@ -185,15 +206,29 @@ var OU = 'ou';
     /// callback est une fonction qui prend la data paramètre
 
     function enrichissementRegions(data, callback) {
-        enrichissement(data, callback);
+        //enrichissement(data, callback);
+        mock(data,callback);
     }
 
     function enrichissementDepartements(data, callback) {
-        enrichissement(data, callback);
+        //enrichissement(data, callback);
+        mock(data,callback);
     }
 
     function enrichissementCommunes(data, callback) {
-        enrichissement(data, callback);
+        //enrichissement(data, callback);
+        mock(data,callback);
+    }
+
+    function mock(data, callback) {
+        var ponderation = activite.length > 0 ? (50-activite.length)/100:0;
+        if(activite.length > 12) {
+            ponderation = ponderation / 5;
+        }
+        data.features.forEach( function (o) {
+            o.properties.ratio = (o.properties.nom.length / 100)*ponderation;
+        });
+        callback(data);
     }
 
     function enrichissement(data, callback) {
