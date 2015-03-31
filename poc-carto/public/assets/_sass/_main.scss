@@ -51,14 +51,19 @@
       font-weight: normal;
       border-radius: 0;
       line-height: 40px;
+      min-width: 95px;
       padding: 0 8px;
-      position: absolute;
-      right: 0;
-      top: 0;
 
       @include font-size( 1.4 ); // =14px
       background: $yellow;
       font-weight: bold;
+    }
+    .actions {
+      @include font-size( 1.3 ); // =13px
+      
+      a {
+        padding-left: 4px;
+      }
     }
 
 
