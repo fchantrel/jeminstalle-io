@@ -36,44 +36,77 @@ L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
 
 //======================================================================================
 
-function showMapIcon( lat, lng, sType )
+function showMapIcon( lat, lng, sType, sEtabName )
 {
     var LeafIcon = L.Icon.extend({
         options: {
-            // shadowUrl: '../docs/images/leaf-shadow.png',
             iconSize:     [32, 32],
-            shadowSize:   [32, 32],
-            // iconAnchor:   [22, 94],
-            // shadowAnchor: [4, 62],
+            iconAnchor:   [22, 94],
             popupAnchor:  [-3, -76]
+            //shadowUrl: '../docs/images/leaf-shadow.png',
+            // shadowSize:   [32, 32],
+            // shadowAnchor: [4, 62],
         }
     });
 
     switch( sType )
     {
-        case 'boulangerie':
+        case 'boulangeries':
             sImage = 'boulangerie.png';
             break;
         case 'medecin':
             sImage = 'Medecin1.png';
             break;
-        case 'pharmacie':
+        case 'pharmacies':
             sImage = 'pharmacie1.png';
             break;
-        case 'ecole':
+        case 'ecoles':
             sImage = 'ecole.png';
             break;
-        case 'bar':
-            sImage = 'ecole.png';
+        case 'bars':
+            sImage = 'juice2.png';
+            break;
+        default :
+            sImage = 'map-pointer7.png';
             break;
 
     }
 
-    var jeminstalleIO_Icon = new LeafIcon({iconUrl: '../docs/img/'+sImage}),
+    var jeminstalleIO_Icon = new LeafIcon({iconUrl: 'assets/img/'+sImage});
 
-    L.marker([lat, lng], {icon: jeminstalleIO_Icon})
-        .addTo(map);
-        // .bindPopup("I am a green leaf.")
+    // L.marker([lat, lng], {icon: jeminstalleIO_Icon}).addTo(map);
+    L.marker([lat, lng], {icon: jeminstalleIO_Icon}).bindPopup(sEtabName).addTo(map);
+}
+//======================================================================================
+function displayActivitePoi(  sActiviteLib, oDatasActivite ) {
+
+    var aEtablissements = oDatasActivite.hits.hits;
+
+    // console.log('aEtablissements : '+aEtablissements[0]._index);
+
+    for(var i=0; i<aEtablissements.length; i++)
+    {
+        oEtab = aEtablissements[i];
+
+        var sEtabName = oEtab._source.intlprincipal;
+        var lat = oEtab._source.proGeoCoord.lat;
+        var lon = oEtab._source.proGeoCoord.lon;
+        //console.log('sEtabName : '+sEtabName+' - lat : '+lat+' lon : '+lon+' - sActiviteLib : '+sActiviteLib);
+        showMapIcon( lat, lon, sActiviteLib, sEtabName );
+    }
+
+
+}
+
+//======================================================================================
+// TOOL : fonction pour nettoyer le JSON malformé...
+function _cleanJsonStringToObject( sJsonActivites ){
+
+    var sOut = sJsonActivites.replace( /^(")/, "" );
+        sOut = sJsonActivites.replace( /(")$/, "" );
+        sOut = sJsonActivites.replace( /\\/, '' );
+
+    return $.parseJSON( sOut );
 }
 
 //======================================================================================
@@ -82,10 +115,21 @@ function displayEnvironnement( oDatas )
 {
     console.log( 'displayEnvironnement : '+oDatas );
 
+
+
     //Recentrage de la carte sur la localité choisie
     updateMap(  oDatas.refGeo );
 
-    //Recentrage de la carte sur la localité choisie
+    // Affichage des POI activités
+    var aActivites = ['boulangeries', 'pharmacies', 'ecoles', 'bars'];
+    for( var i in aActivites ){
+        var strActivite = eval( 'oDatas.'+aActivites[i]);
+        oDatasActivite = _cleanJsonStringToObject( strActivite );
+        //Affichage des POI de l'activité
+        displayActivitePoi(  aActivites[i], oDatasActivite );
+    }
+
+    //Affichage des infos de pollution
     displayPollution(  oDatas.pollution );
 
 }
@@ -118,7 +162,7 @@ function initFormSearch(){
         $.getJSON( "../../../dataparticulier_ville_"+sVille+".json", function( data ) {
             displayEnvironnement(data);
         });
-    })
+    });
 }
 
 //======================================================================================
