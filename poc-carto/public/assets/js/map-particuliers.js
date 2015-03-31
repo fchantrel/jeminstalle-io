@@ -17,9 +17,9 @@ var greenIcon = new LeafIcon({iconUrl: '../docs/images/leaf-green.png'}),
     redIcon = new LeafIcon({iconUrl: '../docs/images/leaf-red.png'}),
     orangeIcon = new LeafIcon({iconUrl: '../docs/images/leaf-orange.png'});
 
-L.marker([51.5, -0.09], {icon: greenIcon}).bindPopup("I am a green leaf.").addTo(map);
-L.marker([51.495, -0.083], {icon: redIcon}).bindPopup("I am a red leaf.").addTo(map);
-L.marker([51.49, -0.1], {icon: orangeIcon}).bindPopup("I am an orange leaf.").addTo(map);
+L.marker([47.02, 2.3], {icon: greenIcon}).bindPopup("I am a green leaf.").addTo(map);
+L.marker([47.08, 2.47], {icon: redIcon}).bindPopup("I am a red leaf.").addTo(map);
+L.marker([47.18, 2.27], {icon: orangeIcon}).bindPopup("I am an orange leaf.").addTo(map);
 //------------------------------------------------------
 
 
