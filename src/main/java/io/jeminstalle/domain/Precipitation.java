@@ -3,20 +3,19 @@ package io.jeminstalle.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-@Document(indexName = "jeminstalle", type = "pollution", shards = 1, replicas = 0, refreshInterval = "-1")
-public class Pollution {
+/**
+ * Created by raphael on 31/03/2015.
+ */
+
+@Document(indexName = "jeminstalle", type = "precipitation", shards = 1, replicas = 0, refreshInterval = "-1")
+public class Precipitation {
 
     @Id
     private String id;
-
     private String classement;
-
-    private String nodepartement;
-
+    private String precipitation;
     private String libelledepartement;
-
-    private Long nbsitespolues;
-
+    private String nodepartement;
 
     public String getId() {
         return id;
@@ -34,12 +33,12 @@ public class Pollution {
         this.classement = classement;
     }
 
-    public String getNodepartement() {
-        return nodepartement;
+    public String getPrecipitation() {
+        return precipitation;
     }
 
-    public void setNodepartement(String nodepartement) {
-        this.nodepartement = nodepartement;
+    public void setPrecipitation(String precipitation) {
+        this.precipitation = precipitation;
     }
 
     public String getLibelledepartement() {
@@ -50,11 +49,11 @@ public class Pollution {
         this.libelledepartement = libelledepartement;
     }
 
-    public Long getNbsitespolues() {
-        return nbsitespolues;
+    public String getNodepartement() {
+        return nodepartement;
     }
 
-    public void setNbsitespolues(Long nbsitespolues) {
-        this.nbsitespolues = nbsitespolues;
+    public void setNodepartement(String nodepartement) {
+        this.nodepartement = nodepartement;
     }
 }

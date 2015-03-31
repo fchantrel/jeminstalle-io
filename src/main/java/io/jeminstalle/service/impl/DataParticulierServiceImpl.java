@@ -1,10 +1,7 @@
 package io.jeminstalle.service.impl;
 
-import io.jeminstalle.dao.PolutionDAO;
-import io.jeminstalle.dao.RefGeoDao;
-import io.jeminstalle.domain.DataParticulier;
-import io.jeminstalle.domain.Pollution;
-import io.jeminstalle.domain.RefGeo;
+import io.jeminstalle.dao.*;
+import io.jeminstalle.domain.*;
 import io.jeminstalle.service.DataParticulierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +16,22 @@ public class DataParticulierServiceImpl implements DataParticulierService {
     private RefGeoDao refGeoDao;
 
     @Autowired
-    private PolutionDAO polutionDAO;
+    private PollutionDAO pollutionDAO;
+
+    @Autowired
+    private Couverture4GDAO couverture4GDAO;
+
+    @Autowired
+    private EnsoleillementDAO ensoleillementDAO;
+
+    @Autowired
+    private RevenuMoyenDAO revenuMoyenDAO;
+
+    @Autowired
+    private PrecipitationDAO precipitationDAO;
+
+    @Autowired
+    private NucleaireDAO nucleaireDAO;
 
 
     @Override
@@ -30,21 +42,19 @@ public class DataParticulierServiceImpl implements DataParticulierService {
         RefGeo refGeo = refGeoDao.findByName(name).get(0);
 
         String departement = refGeo.getZipcode().substring(0, 2);
-
-        // FIXME
-        //Pollution pollution = polutionDAO.findByNodepartement(departement).get(0);
-
-        Pollution pollution = new Pollution();
-        pollution.setId("yqLHtOr5TMOlstMYDLCs7g");
-        pollution.setNodepartement("35");
-        pollution.setClassement("29");
-        pollution.setLibelledepartement("Ille-et-Vilaine");
-        pollution.setNbsitespolues(12L);
-
+        Pollution pollution = pollutionDAO.findByNodepartement(departement).get(0);
+        Couverture4G couverture4G = couverture4GDAO.findByCodedepartement(departement);
+        Ensoleillement ensoleillement = ensoleillementDAO.findByNodepartement(departement);
+        RevenuMoyen revenuMoyen = revenuMoyenDAO.findByNomcommune(name);
+        Precipitation precipitation = precipitationDAO.findByNodepartement(departement);
+        Nucleaire nucleaire = nucleaireDAO.findByNumdep(departement);
 
         dp.setRefGeo(refGeo);
         dp.setPollution(pollution);
-
+        dp.setCouverture4G(couverture4G);
+        dp.setRevenuMoyen(revenuMoyen);
+        dp.setPrecipitation(precipitation);
+        dp.setNucleaire(nucleaire);
 
         return dp;
     }

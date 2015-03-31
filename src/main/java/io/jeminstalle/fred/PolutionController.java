@@ -3,7 +3,7 @@ package io.jeminstalle.fred;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import io.jeminstalle.dao.PolutionDAO;
+import io.jeminstalle.dao.PollutionDAO;
 import io.jeminstalle.domain.Pollution;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.Collection;
 public class PolutionController {
 
 	@Autowired
-	private PolutionDAO repository;
+	private PollutionDAO repository;
 	
     /**
      * Recupere tous les Polution.

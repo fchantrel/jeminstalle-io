@@ -5,7 +5,7 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 
 import java.util.List;
 
-public interface PolutionDAO extends ElasticsearchRepository<Pollution, String> {
+public interface PollutionDAO extends ElasticsearchRepository<Pollution, String> {
 
     List<Pollution> findByNodepartement(String nodepartement);
 
