@@ -1,0 +1,108 @@
+/*
+ * @filename    : variables.scss
+ * @description : Contient l'ensemble des variables du site
+ * @author      : Tresor ILOYI
+ * @date        : MARS 2015
+ * -------------------------------------------- */
+
+/*
+ * =VARIABLES PAR DEFAUT
+ * -------------------------------------------- */
+
+/*
+ * =COULEURS
+ * -------------------------------------------- */
+ $white        : #ffffff;
+ $black        : #000000;
+ $gray-dark-1  : #2b2b2b;
+ $gray-dark-2  : #303030;
+
+ $gray-1       : #cbcbcb;
+ $gray-2       : #e0e0e0;
+
+ $gray-light-1 : #fafafa;
+ $gray-light-2 : #eeeeee;
+ $gray-light-3 : #777777;
+
+ $yellow       : #ffeb00;
+
+
+/*
+ * =POLICES
+ * -------------------------------------------- */
+// Fonts
+// -------------------------
+$f-size-root: 10px;
+$line-height-root: 14px;
+$font-default: 'Arial', 'Helvetica', sans-serif;
+$dilo-light: 'dilo_45_light45light', $font-default;
+$dilo-roman: 'dilo_55_roman55roman', $font-default;
+$dilo-bold: 'dilo_65bold', $font-default;
+
+
+
+@mixin font-size( $size: 1.6 ) {
+  font-size: ($size * 10) + px;
+  font-size: $size + rem;
+}
+
+
+/*
+ * =LISTES
+ * -------------------------------------------- */
+ @mixin reset-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+/*
+ * =POSITIONNEMENT
+ * ------------------------------------------- */
+ @mixin inline-block( $valign: top ) {
+  display: inline-block;
+  vertical-align: $valign;
+}
+
+
+/*
+ * =MISC
+ * ------------------------------------------- */
+ @mixin margin-auto ( $max-width: 960px ) {
+  margin: 0 auto;
+  max-width: $max-width;
+  width: 100%;
+}
+
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin hide {
+  position: absolute;
+  left: -999em;
+}
+
+
+@mixin box-sizing($box) {
+    -moz-box-sizing: $box;
+    -webkit-box-sizing: $box;
+    box-sizing: $box;
+}
+
+
+@mixin materialDesignBox() {
+  border-width: 0;
+  outline: none;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+
+  background-color: $white;
+  color: $black;
+
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+  transition: background-color .3s;
+}

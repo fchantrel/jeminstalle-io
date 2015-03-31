@@ -1,0 +1,24 @@
+/* 
+ * @filename    : footer.scss
+ * @description : Styles du footer
+ * @author      : Tresor ILOYI
+ * @date        : MARS 2015
+ * -------------------------------------------- */
+
+
+/*  
+ * =FOOTER SITE
+ * -------------------------------------------- */
+.site-footer {
+  background: $gray-light-1;
+  border-top: 1px solid $gray-light-2;
+  color: $gray-light-3;
+  
+  
+  small {
+    display: block;
+    padding: 20px 0;
+    text-align: right;
+  }
+  
+}
