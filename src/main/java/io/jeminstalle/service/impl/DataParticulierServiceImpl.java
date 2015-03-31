@@ -45,7 +45,7 @@ public class DataParticulierServiceImpl implements DataParticulierService {
         Pollution pollution = pollutionDAO.findByNodepartement(departement).get(0);
         Couverture4G couverture4G = couverture4GDAO.findByCodedepartement(departement);
         Ensoleillement ensoleillement = ensoleillementDAO.findByNodepartement(departement);
-        RevenuMoyen revenuMoyen = revenuMoyenDAO.findByNomcommune(name);
+        RevenuMoyen revenuMoyen = revenuMoyenDAO.findByNomcommune(name).get(0);
         Precipitation precipitation = precipitationDAO.findByNodepartement(departement);
         Nucleaire nucleaire = nucleaireDAO.findByNumdep(departement);
 
