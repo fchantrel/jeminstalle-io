@@ -1,0 +1,124 @@
+<!doctype html>
+<!--[if lte IE 7]> <html class="no-js ie67 ie678" lang="fr"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8 ie678" lang="fr"> <![endif]-->
+<!--[if IE 9]> <html class="no-js ie9" lang="fr"> <![endif]-->
+<!--[if gt IE 9]> <!--><html class="no-js" lang="fr"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+    <title>jeminstalle.io</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="assets/libs/bootstrap-3.3.4/css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" media="all">
+</head>
+<body>
+    <div id="page">
+
+        <header class="site-header">
+            <div class="container">
+                <h1 class="site-title"><a href="index.html">jeminstalle.io</a></h1>
+            </div>
+        </header> <!-- /END .site-header -->
+
+        <main class="content">
+
+            <section class="area-search">
+
+                <div class="form-container">
+                    <form id="searchForm" class="search-form" method="post" action="">
+                        <label for="search">Je m'installe....</label>
+                        <input type="search" id="search" class="search" name="search" autofocus value="" />
+                        <button type="submit" class="btn btn-default">Rechercher</button>
+                        <br/>
+                        <a href="#compareForm" id="aCompareForm">Comparer 2 localités</a>
+                    </form>
+
+                    <form id="compareForm" class="search-form" method="post" action="">
+                        <label for="premiere-loc">Première localité</label>
+                        <input type="search" id="premiere-loc" class="search" name="search" value="" placeholder="Saisissez une première localité" />
+                        <br/>
+                        <label for="seconde-loc">Seconde localité</label>
+                        <input type="search" id="seconde-loc" class="search" name="search" value="" placeholder="Saisissez une seconde localité" />
+                        <br/>
+                        <div class="actions">
+                            <a href="#searchForm" id="aSearchForm">Revenir à la recherche</a>
+
+                            <button type="submit" class="btn btn-compare">Comparer</button>
+                        </div>
+                    </form>
+                </div> <!-- /END .form-container -->
+
+                <div class="map-container" id="map">
+                </div> <!-- /END .map-container -->
+
+            </section> <!-- /END .area-search -->
+
+            <section class="area-result">
+
+                <div class="container">
+
+                    <div class="bloc fullwidth" id="cadre-vie">
+                        <h2 class="bloc-title">Cadre de vie</h2>
+                        Ensoleillement, Pluviométrie<br/>
+                        Nombre de sites pollués<br/>
+                        Nombre de centrales nucléaires (dans le département)<br/>
+
+                    </div>
+
+                    <div class="bloc" id="transport">
+                        <h2 class="bloc-title">Transport</h2>
+                        Gare, Métro, Bus
+                    </div>
+
+                    <div class="bloc" id="famille">
+                        <h2 class="bloc-title">Famille</h2>
+                        Ecole, Crèche
+
+                    </div>
+
+                    <div class="bloc no-bdr-right" id="administratif">
+                        <h2 class="bloc-title">Administratif</h2>
+                        Revenus moyen, Impots Locaux, Prix au m²
+                    </div>
+
+                    <div class="bloc" id="commerces">
+                        <h2 class="bloc-title">Commerces</h2>
+                        Boulangerie, Supérette, Tabac, Poste
+                    </div>
+
+                    <div class="bloc" id="sante">
+                        <h2 class="bloc-title">Santé</h2>
+                        Pharmacie, Médecin généraliste
+                    </div>
+
+                    <div class="bloc no-bdr-right" id="reseaux">
+                        <h2 class="bloc-title">Réseaux</h2>
+                        Couverture 4G par opérateur :
+                        Orange, SFR, Free, BouyguesTelecom
+                    </div>
+
+                </div> <!-- /END .container -->
+
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <small>&copy; jeminstalle.io - PagesJaunes</small>
+            </div>
+        </footer> <!-- /END .site-footer -->
+    </div>
+
+
+    <script src="assets/js/jquery-2.1.3.min.js"></script>
+    <!-- <script src="assets/libs/bootstrap-3.3.4/js/bootstrap.js"></script> -->
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="assets/js/map.js"></script>
+    <script src="assets/js/scripts.js"></script>
+</body>
+</html>
