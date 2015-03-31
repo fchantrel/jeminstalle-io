@@ -1,17 +1,23 @@
-/* 
+/*
  * @filename    : global.scss
  * @description : Styles global
  * @author      : Tresor ILOYI
  * @date        : MARS 2015
  * -------------------------------------------- */
 
-/*  
+/*
  * =SURCHARGE RESET
  * -------------------------------------------- */
-body {}
+html,
+body {
+    width: 100%;
+    height: 100%;
+
+    font-family: $dilo-roman;
+}
 
 
-/*  
+/*
  * =STRUCTURE
  * -------------------------------------------- */
 .content {
