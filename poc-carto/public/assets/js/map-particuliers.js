@@ -89,9 +89,7 @@ function _cleanJsonStringToObject( sJsonActivites ){
 // AFFICHAGE DES DONNEES SUR L'INTERFACE
 function displayEnvironnement( oDatas )
 {
-    console.log( 'displayEnvironnement : '+oDatas );
-
-
+    //console.log( 'displayEnvironnement : '+oDatas );
 
     //Recentrage de la carte sur la localité choisie
     updateMap(  oDatas.refGeo );
@@ -108,6 +106,17 @@ function displayEnvironnement( oDatas )
     //Affichage des infos de pollution
     displayPollution(  oDatas.pollution );
 
+    //Affichage des infos de couverture4G
+    displayCouverture4G(  oDatas.couverture4G );
+
+    //Affichage des infos de Revenu Moyen
+    displayRevenuMoyen(  oDatas.revenuMoyen );
+
+    //Affichage des infos de Précipitations
+    displayPrecipitation(  oDatas.precipitation );
+
+    //Affichage des infos de Nucléaire
+    displayNucleaire(  oDatas.nucleaire );
 }
 
 // Recentrage de la carte
@@ -125,6 +134,45 @@ function displayPollution(   oDatasPollution ) {
     $("#nbSitesPollues")
         .attr("class", sNiveau )
         .find('span.value').html( ' : '+oDatasPollution.nbsitespolues );
+}
+
+
+//Affichage des infos de couverture4G
+function displayCouverture4G(  oDatasCouverture4G )
+{
+    $("#orange").find('span.value').html(' : '+ (oDatasCouverture4G.couvorange*100) +'%');
+    $("#sfr").find('span.value').html(' : '+ (oDatasCouverture4G.couvsfr*100) +'%');
+    $("#free").find('span.value').html(' : '+ (oDatasCouverture4G.couvfree*100) +'%');
+    $("#bouygues").find('span.value').html(' : '+ (oDatasCouverture4G.couvbouygues*100) +'%');
+}
+
+//Affichage des infos de Revenu Moyen
+function displayRevenuMoyen(  oDatasRevenuMoyen )
+{
+    var iNbCommunesEnFrance = 36552;
+    var iClassmt = oDatasRevenuMoyen.classement;
+    var sNiveau = 'niveau-'+ Math.ceil( iClassmt/iNbCommunesEnFrance );
+    $("#revenuMoyen")
+        .attr("class", sNiveau )
+        .find('span.value').html( ' : '+oDatasRevenuMoyen.revenu+' &euro;/an' );
+}
+
+//Affichage des infos de Précipitations
+function displayPrecipitation(  oDatasPrecipitation )
+{
+    var iNbDepEnFrance = 101;
+    var iClassmt = oDatasPrecipitation.classement;
+    var sNiveau = 'niveau-'+ Math.ceil( iClassmt/iNbDepEnFrance );
+    $("#pluviometrie")
+        .attr("class", sNiveau )
+        .find('span.value').html( ' : '+oDatasPrecipitation.precipitation+' ??/an' );
+}
+
+//Affichage des infos de Nucléaire
+function displayNucleaire(  oDatasNucleaire )
+{
+    $("#nbCentrales")
+        .find('span.value').html( ' : '+oDatasNucleaire.nbcentrale+' centrale(s) dans le département.' );
 }
 
 //======================================================================================
