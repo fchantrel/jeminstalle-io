@@ -15,7 +15,7 @@ import java.util.List;
 public class DataProServiceImpl implements DataProService {
 
     @Autowired
-    private RefGeoDao refGeoDao;
+    private LightRefGeoDao lightRefGeoDao;
 
     @Autowired
     private PollutionDAO pollutionDAO;
@@ -43,14 +43,25 @@ public class DataProServiceImpl implements DataProService {
     public DataPro getDataPro(String activite, String ou) {
 
         DataPro dp = new DataPro();
-
-        RefGeo refGeo = refGeoDao.findByName(ou).get(0);
-        
-        dp.setPopulation(refGeo.getPopulation());
         dp.setActivite(activite);
         dp.setOu(ou);
-        dp.setNbPro(10);
-        dp.setRatio(1.123);
+        
+        try{
+        	List<LightRefGeo> lstRefGeo = lightRefGeoDao.findByInseecode(ou);
+        	if(lstRefGeo.size() > 0){
+        		LightRefGeo refGeo = lstRefGeo.get(0);
+        		dp.setPopulation(refGeo.getPopulation());
+        		System.out.println("Lieu trouve pour le code insee : " + ou);
+        	} else {
+        		System.out.println("Pas de lieu trouve pour le code insee : " + ou);
+        		dp.setPopulation(10000);
+        	}
+            
+            dp.setNbPro(10);
+            dp.setRatio(1.123);
+        } catch(Exception e){
+        	e.printStackTrace();
+        }
         
         /**
         String departement = refGeo.getZipcode().substring(0, 2);
