@@ -34,6 +34,38 @@ L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
         id: 'examples.map-20v6611k'
     }).addTo(map);
 
-//------------------------------------------------------
+//======================================================================================
+// AFFICHAGE DES DONNEES SUR L'INTERFACE
+function displayEnvironnement( oDatas )
+{
+    console.log( 'displayEnvironnement : '+oDatas );
+
+    //Recentrage de la carte sur la localité choisie
+    updateMap(  oDatas.refGeo );
+
+    //Recentrage de la carte sur la localité choisie
+    displayPollution(  oDatas.pollution );
+
+}
+
+// Recentrage de la carte
+function updateMap(  oRefGeo ){
+    var lat = oRefGeo.latitude; //": 48.114723,
+    var lng = oRefGeo.longitude; //": -1.679444,
+    console.log( 'lat : '+lat+' - lng : '+lng );
+    return map.setView([lat, lng], 13);
+}
+
+// Affichage du nombre de sites pollués
+function displayPollution(   oDatasPollution ){
+    $("#nbSitesPollues").html( oDatasPollution.nbsitespolues );
+}
+
+//======================================================================================
 // Chargement des données
-// $(document).ready(function() {});
+$(document).ready(function() {
+    $.getJSON( "../../../dataparticulier_ville_rennes.json", function( data ) {
+        displayEnvironnement(data);
+    });
+
+});
