@@ -144,10 +144,10 @@
       background: $white;
       display: inline-block;
       vertical-align: top;
-      height: 150px;
+      min-height: 150px;
       width:31%;
       margin: 10px 3% 10px  0;
-      padding: 15px;
+      //padding: 15px;
 
       // border:1px solid $gray-light-1;
       border:1px solid $gray-dark-1;

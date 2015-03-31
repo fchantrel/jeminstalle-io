@@ -58,14 +58,31 @@ function updateMap(  oRefGeo ){
 
 // Affichage du nombre de sites pollués
 function displayPollution(   oDatasPollution ){
-    $("#nbSitesPollues").html( oDatasPollution.nbsitespolues );
+    var iClassmt = oDatasPollution.classement / 100;
+    // if( iClassmt > 1 ) {
+    // }
+    // else{
+    // }
+    $("#nbSitesPollues").attr("class", iClassmt );
+    $("#nbSitesPollues").find('span.value').html( ' : '+oDatasPollution.nbsitespolues );
+}
+
+//======================================================================================
+// Formulaire de recherche
+function initFormSearch(){
+    $("#searchForm").on('submit', function(e){
+
+        e.preventDefault();
+        // var sVille = $('#search').val();
+        var sVille = 'rennes';//on triche !
+        $.getJSON( "../../../dataparticulier_ville_"+sVille+".json", function( data ) {
+            displayEnvironnement(data);
+        });
+    })
 }
 
 //======================================================================================
 // Chargement des données
 $(document).ready(function() {
-    $.getJSON( "../../../dataparticulier_ville_rennes.json", function( data ) {
-        displayEnvironnement(data);
-    });
-
+    initFormSearch();
 });
