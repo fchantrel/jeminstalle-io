@@ -20,4 +20,11 @@
     > a {
         color:$white;
     }
+
+    .page-title {
+        display: inline-block;
+        margin-left: 30%;
+        font-family: $dilo-bold;
+        color:$white;
+    }
 }
