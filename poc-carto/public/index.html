@@ -34,6 +34,22 @@
                         <label for="search">Je m'installe....</label>
                         <input type="search" id="search" class="search" name="search" autofocus value="" />
                         <button type="submit" class="btn btn-default">Rechercher</button>
+                        <br/>
+                        <a href="#compareForm" id="aCompareForm">Comparer 2 localités</a>
+                    </form>
+
+                    <form id="compareForm" class="search-form" method="post" action="">
+                        <label for="premiere-loc">Première localité</label>
+                        <input type="search" id="premiere-loc" class="search" name="search" value="" placeholder="Saisissez une première localité" />
+                        <br/>
+                        <label for="seconde-loc">Seconde localité</label>
+                        <input type="search" id="seconde-loc" class="search" name="search" value="" placeholder="Saisissez une seconde localité" />
+                        <br/>
+                        <div class="actions">
+                            <a href="#searchForm" id="aSearchForm">Revenir à la recherche</a>
+
+                            <button type="submit" class="btn btn-compare">Comparer</button>
+                        </div>
                     </form>
                 </div> <!-- /END .form-container -->
 
@@ -103,5 +119,6 @@
     <!-- <script src="assets/libs/bootstrap-3.3.4/js/bootstrap.js"></script> -->
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <script src="assets/js/map.js"></script>
+    <script src="assets/js/scripts.js"></script>
 </body>
 </html>
