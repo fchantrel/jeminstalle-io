@@ -18,9 +18,9 @@ html {
 }
 
 body {
-    font-size: 14px;
+  font-size: 14px;
+  background: $gray-light-4;
 }
-
 
 
 /*
@@ -41,6 +41,23 @@ body {
 .content {
   min-height: 700px;
   position: relative;
+}
+
+
+/*
+ * =ELEMENTS DE CONTENUS
+ * -------------------------------------------- */
+a {
+  text-decoration: none;
+  
+  &,
+  &:hover {
+    color: $blue;
+  }
+  
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 

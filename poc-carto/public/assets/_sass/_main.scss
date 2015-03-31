@@ -18,6 +18,8 @@
  * =FORM
  * -------------------------------------------- */
  .form-container {
+    background: $white;
+    padding: 10px;
     position: absolute;
     z-index: 100;
     top: 13px;
@@ -34,27 +36,29 @@
     }
 
     input {
-        @include font-size(1.6);
-        margin: 0;
-        line-height: 50px;
-        padding: 0 20px;
-        width: 100%;
-
-        background: $white;
-        @include materialDesignBox();
+      @include font-size(1.6);
+      background: $gray-light-2;
+      border: 0;
+      margin: 0;
+      line-height: 42px;
+      padding: 0 14px;
+      width: 100%;
+      //@include materialDesignBox();
     }
 
-    .btn-default {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 30px;
-        height: 50px;
-        overflow: hidden;
+    .btn-submit {
+      //height: 50px;
+      font-weight: normal;
+      border-radius: 0;
+      line-height: 40px;
+      padding: 0 8px;
+      position: absolute;
+      right: 0;
+      top: 0;
 
-        @include font-size(1);
-        background: $yellow;
-        font-weight: bold;
+      @include font-size( 1.4 ); // =14px
+      background: $yellow;
+      font-weight: bold;
     }
 
 
