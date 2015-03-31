@@ -17,9 +17,9 @@ var greenIcon = new LeafIcon({iconUrl: '../docs/images/leaf-green.png'}),
     redIcon = new LeafIcon({iconUrl: '../docs/images/leaf-red.png'}),
     orangeIcon = new LeafIcon({iconUrl: '../docs/images/leaf-orange.png'});
 
-L.marker([51.5, -0.09], {icon: greenIcon}).bindPopup("I am a green leaf.").addTo(map);
-L.marker([51.495, -0.083], {icon: redIcon}).bindPopup("I am a red leaf.").addTo(map);
-L.marker([51.49, -0.1], {icon: orangeIcon}).bindPopup("I am an orange leaf.").addTo(map);
+L.marker([47.02, 2.3], {icon: greenIcon}).bindPopup("I am a green leaf.").addTo(map);
+L.marker([47.08, 2.47], {icon: redIcon}).bindPopup("I am a red leaf.").addTo(map);
+L.marker([47.18, 2.27], {icon: orangeIcon}).bindPopup("I am an orange leaf.").addTo(map);
 //------------------------------------------------------
 
 
@@ -34,6 +34,38 @@ L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
         id: 'examples.map-20v6611k'
     }).addTo(map);
 
-//------------------------------------------------------
+//======================================================================================
+// AFFICHAGE DES DONNEES SUR L'INTERFACE
+function displayEnvironnement( oDatas )
+{
+    console.log( 'displayEnvironnement : '+oDatas );
+
+    //Recentrage de la carte sur la localité choisie
+    updateMap(  oDatas.refGeo );
+
+    //Recentrage de la carte sur la localité choisie
+    displayPollution(  oDatas.pollution );
+
+}
+
+// Recentrage de la carte
+function updateMap(  oRefGeo ){
+    var lat = oRefGeo.latitude; //": 48.114723,
+    var lng = oRefGeo.longitude; //": -1.679444,
+    console.log( 'lat : '+lat+' - lng : '+lng );
+    return map.setView([lat, lng], 13);
+}
+
+// Affichage du nombre de sites pollués
+function displayPollution(   oDatasPollution ){
+    $("#nbSitesPollues").html( oDatasPollution.nbsitespolues );
+}
+
+//======================================================================================
 // Chargement des données
-// $(document).ready(function() {});
+$(document).ready(function() {
+    $.getJSON( "../../../dataparticulier_ville_rennes.json", function( data ) {
+        displayEnvironnement(data);
+    });
+
+});
