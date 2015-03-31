@@ -89,10 +89,10 @@ var mapL;
 
     function resetHighlight(e) {
         geojson.resetStyle(e.target);
-        if(departementgeojson !='undefined') {
+        if(departementgeojson != null) {
             departementgeojson.resetStyle(e.target);
         }
-        if(communegeojson !='undefined') {
+        if(communegeojson != null) {
             communegeojson.resetStyle(e.target);
         }
         info.update();
@@ -111,11 +111,12 @@ var mapL;
         mapL.fitBounds(e.target.getBounds());
         // Rajouter les départements
         var code = e.target.feature.properties.code;
-        console.log(e.target);
-        console.log(geojson);
+        //console.log(e.target);
+        //console.log(geojson);
 
         // Si je clique sur une region
         if(inLayer(e.target, geojson)) {
+            clearCommune();
             // Si l'ancien layer departement existe, le supprimer
             if(mapL.hasLayer(departementgeojson)) {
                 mapL.removeLayer(departementgeojson);
@@ -134,10 +135,11 @@ var mapL;
                      }).addTo(mapL);
                 });
             });
-        }
+        } else
 
         // Si je clique sur un département
         if(inLayer(e.target, departementgeojson)) {
+            clearCommune();
             // Si l'ancien layer communes existe, le supprimer
             if(mapL.hasLayer(communegeojson)) {
                 mapL.removeLayer(communegeojson);
@@ -152,6 +154,9 @@ var mapL;
                      }).addTo(mapL);
                 });
             });
+        } else {
+            // Je suis dans une commune
+            displayCommune(e.target.feature.properties);
         }
     }
 
@@ -180,8 +185,11 @@ var mapL;
     /// =======================   refresh pour une activité donnée
 
     function refresh(anActivite) {
+        geojson = null;
+        departementgeojson = null;
+        communegeojson = null;
         activite = anActivite;
-        console.log(mapL);
+        //console.log(mapL);
         if(mapL != null) {
             mapL.remove();
         }
@@ -261,3 +269,16 @@ var mapL;
     }
 
     /// ================================= FIN ENRICHISSEMENTS DONNEES =========================
+
+
+    /// Affichage du cartouche de la commune
+
+    function displayCommune(props) {
+        // TODO
+        console.log("Afficher le cartouche de la commune");
+    }
+
+    function clearCommune() {
+        // TODO
+        console.log("Nettoyer le cartouche de la commune");
+    }
