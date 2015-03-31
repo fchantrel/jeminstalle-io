@@ -1,97 +1,112 @@
 @font-face {
-	font-family: "Flaticon";
-	src: url("flaticon.eot");
-	src: url("flaticon.eot#iefix") format("embedded-opentype"),
-	url("flaticon.woff") format("woff"),
-	url("flaticon.ttf") format("truetype"),
-	url("flaticon.svg") format("svg");
-	font-weight: normal;
-	font-style: normal;
+  font-family: "Flaticon";
+  src: url("../fonts/flaticon.eot");
+  src: url("../fonts/flaticon.eot#iefix") format("embedded-opentype"),
+  url("../fonts/flaticon.woff") format("woff"),
+  url("../fonts/flaticon.ttf") format("truetype"),
+  url("../fonts/flaticon.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
 }
-[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
-[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
-	font-family: Flaticon;
-        font-size: 20px;
-font-style: normal;
-margin-left: 20px;
-}.flaticon-bars-graphic1:before {
+[class^="flaticon-"]:before, 
+[class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, 
+[class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+  font-size: 20px;
+  font-style: normal;
+  margin-left: 20px;
+}
+.flaticon-medecin1:before {
 	content: "\e000";
 }
-.flaticon-boulangerie:before {
+.flaticon-bars-graphic1:before {
 	content: "\e001";
 }
-.flaticon-pharmacie3:before {
+.flaticon-boulangerie:before {
 	content: "\e002";
 }
-.flaticon-internet2:before {
+.flaticon-city-hall:before {
 	content: "\e003";
 }
-.flaticon-couverturegsm:before {
+.flaticon-internet2:before {
 	content: "\e004";
 }
-.flaticon-revenusmoyen:before {
+.flaticon-couverturegsm:before {
 	content: "\e005";
 }
-.flaticon-facebook30:before {
+.flaticon-revenusmoyen:before {
 	content: "\e006";
 }
-.flaticon-prixm2:before {
+.flaticon-facebook30:before {
 	content: "\e007";
 }
 .flaticon-map-pointer7:before {
 	content: "\e008";
 }
-.flaticon-Medecin1:before {
+.flaticon-impotslocaux2:before {
 	content: "\e009";
 }
-.flaticon-impotslocaux2:before {
+.flaticon-creche:before {
 	content: "\e00a";
 }
-.flaticon-creche:before {
+.flaticon-mother20:before {
 	content: "\e00b";
 }
-.flaticon-mother20:before {
+.flaticon-park15:before {
 	content: "\e00c";
 }
 .flaticon-metro:before {
 	content: "\e00d";
 }
-.flaticon-pharmacie2:before {
+.flaticon-pharmacie3:before {
 	content: "\e00e";
 }
-.flaticon-pharmacie1:before {
+.flaticon-pharmacie2:before {
 	content: "\e00f";
 }
-.flaticon-impotslocaux1:before {
+.flaticon-pharmacie1:before {
 	content: "\e010";
 }
-.flaticon-real-estate:before {
+.flaticon-impotslocaux1:before {
 	content: "\e011";
 }
-.flaticon-real11:before {
+.flaticon-prixm2:before {
 	content: "\e012";
 }
-.flaticon-savings1:before {
+.flaticon-real-estate:before {
 	content: "\e013";
 }
-.flaticon-ecole:before {
+.flaticon-real11:before {
 	content: "\e014";
 }
-.flaticon-superette:before {
+.flaticon-sale13:before {
 	content: "\e015";
 }
-.flaticon-shoppingbag:before {
+.flaticon-savings1:before {
 	content: "\e016";
 }
-.flaticon-gare:before {
+.flaticon-ecole:before {
 	content: "\e017";
 }
-.flaticon-bus:before {
+.flaticon-superette:before {
 	content: "\e018";
 }
-.flaticon-internet3:before {
+.flaticon-shoppingbag:before {
 	content: "\e019";
 }
-.flaticon-internet1:before {
+.flaticon-store5:before {
 	content: "\e01a";
+}
+.flaticon-gare:before {
+	content: "\e01b";
+}
+.flaticon-bus:before {
+	content: "\e01c";
+}
+.flaticon-internet3:before {
+	content: "\e01d";
+}
+.flaticon-internet1:before {
+	content: "\e01e";
 }
