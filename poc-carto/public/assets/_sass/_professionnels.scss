@@ -11,14 +11,12 @@
   .actions {
     margin-top: 4px;
   }
-  
-  // CARTE
-  
-  
-  
+
   // CONTAINER
   .area-result {
-    min-height: 200px;
+    .container {
+      //min-height: 400px;
+    }
   }
   
   .bloc {
@@ -36,12 +34,16 @@
     background: $gray-light-5;
     line-height: 44px;
     padding: 0 15px;
+    text-transform: uppercase;
   
     & > * {
       @include inline-block( middle );
     }
+    
+    .glyph-icon {
+      color: #43a047;
+    }
   }
-  
   
   .list-info {
     overflow: hidden;
@@ -55,6 +57,11 @@
       max-width: calc( 100% / 3 );
       width: 100%;
     }
+  }
+  
+  .item-title {
+    color: #424242;
+    text-align: center;
   }
   
   
