@@ -1,13 +1,22 @@
 package io.jeminstalle.service.impl;
 
-import io.jeminstalle.dao.*;
-import io.jeminstalle.domain.*;
+import io.jeminstalle.dao.Couverture4GDAO;
+import io.jeminstalle.dao.EnsoleillementDAO;
+import io.jeminstalle.dao.LightRefGeoDao;
+import io.jeminstalle.dao.NucleaireDAO;
+import io.jeminstalle.dao.PollutionDAO;
+import io.jeminstalle.dao.PrecipitationDAO;
+import io.jeminstalle.dao.ProDAO;
+import io.jeminstalle.dao.RevenuMoyenDAO;
+import io.jeminstalle.domain.DataPro;
+import io.jeminstalle.domain.LightRefGeo;
 import io.jeminstalle.service.DataProService;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Created by fchantrel on 31/03/2015.
@@ -96,8 +105,15 @@ public class DataProServiceImpl implements DataProService {
 	        		dp.setPopulation(10000);
 	        	}
 	            
-	            dp.setNbPro(10);
-	            dp.setRatio(1.123);
+	        	int nbProParActiviteParRegion = proDAO.findByRegionAndActivite(ou, activite, "1");
+	        	
+	            dp.setNbPro(nbProParActiviteParRegion);
+	            if(dp.getPopulation() > 0) {
+	            	double ratio = nbProParActiviteParRegion * 1000 / dp.getPopulation(); 
+		            dp.setRatio(ratio);
+	            } else {
+	            	dp.setRatio(1.123);
+	            }
 	        } catch(Exception e){
 	        	e.printStackTrace();
 	        }
