@@ -62,9 +62,14 @@ function displayActivitePoi(  sActiviteLib, oDatasActivite )
 {
     var aEtablissements = oDatasActivite.hits.hits;
 
+    var iNbEtablissements = aEtablissements.length;
     // console.log('aEtablissements : '+aEtablissements[0]._index);
+    if( 'boulangeries' == sActiviteLib  || 'bars' == sActiviteLib )
+    {
+        $("#"+sActiviteLib).find('span.value').html( ' : '+iNbEtablissements+' établissement(s)' );
+    }
 
-    for(var i=0; i<aEtablissements.length; i++)
+    for(var i=0; i<iNbEtablissements; i++)
     {
         oEtab = aEtablissements[i];
         var sEtabName = oEtab._source.intlprincipal;
@@ -117,29 +122,45 @@ function displayEnvironnement( oDatas )
         var strActivite = eval( 'oDatas.'+aActivites[i]);
         oDatasActivite = _cleanJsonStringToObject( strActivite );
         //Affichage des POI de l'activité
-        displayActivitePoi(  aActivites[i], oDatasActivite );
+        if( 'undefined' != typeof(oDatasActivite) ){
+            displayActivitePoi(  aActivites[i], oDatasActivite );
+        }
     }
 
-    displayTransportsPoi( oDatas.transports , oDatasActivite );
+    if( 'undefined' != typeof(oDatas.transports) ){
+        displayTransportsPoi( oDatas.transports , oDatasActivite );
+    }
 
 
     //Affichage des infos de pollution
-    displayPollution(  oDatas.pollution );
+    if( 'undefined' != typeof(oDatas.pollution) ){
+        displayPollution(  oDatas.pollution );
+    }
 
     //Affichage des infos de couverture4G
-    displayCouverture4G(  oDatas.couverture4G );
+    if( 'undefined' != typeof(oDatas.pollution) ){
+        displayCouverture4G(  oDatas.pollution );
+    }
 
     //Affichage des infos de Revenu Moyen
-    displayRevenuMoyen(  oDatas.revenuMoyen );
+    if( 'undefined' != typeof(oDatas.revenuMoyen) ){
+        displayRevenuMoyen(  oDatas.revenuMoyen );
+    }
 
     //Affichage des infos de Précipitations
-    displayPrecipitation(  oDatas.precipitation );
+    if( 'undefined' != typeof(oDatas.precipitation) ){
+        displayPrecipitation(  oDatas.precipitation );
+    }
 
     //Affichage des infos d'Ensoleillement
-    displayEnsoleillement(  oDatas.ensoleillement );
+    if( 'undefined' != typeof(oDatas.ensoleillement) ){
+        displayEnsoleillement(  oDatas.ensoleillement );
+    }
 
     //Affichage des infos de Nucléaire
-    displayNucleaire(  oDatas.nucleaire );
+    if( 'undefined' != typeof(oDatas.nucleaire) ){
+        displayNucleaire(  oDatas.nucleaire );
+    }
 }
 
 // Recentrage de la carte
