@@ -8,12 +8,12 @@ var mapL;
 
     function getColor(d) {
         return d > 1 ? '#800026' :
-            d > 0.5  ? '#BD0026' :
-            d > 0.1  ? '#E31A1C' :
-            d > 0.05  ? '#FC4E2A' :
-            d > 0.01   ? '#FD8D3C' :
-            d > 0.005   ? '#FEB24C' :
-            d > 0.0001   ? '#FED976' :
+            d > 0.8  ? '#BD0026' :
+            d > 0.4  ? '#E31A1C' :
+            d > 0.2  ? '#FC4E2A' :
+            d > 0.1   ? '#FD8D3C' :
+            d > 0.05   ? '#FEB24C' :
+            d > 0.001   ? '#FED976' :
             d > 0 ?          '#FFEDA0':
                 '#FFFFF0';
     }
@@ -56,7 +56,7 @@ var mapL;
         // method that we will use to update the control based on feature properties passed
         info.update = function (props) {
             this._div.innerHTML = '<h4>Densité'+(activite.length>0 ? ' pour '+activite:' de la zone')+'</h4>' +  (props ?
-                '<b>' + props.nom + '</b><br />' + props.ratio + '.'
+                '<b>' + props.nom + '</b><br />' + props.ratio + ' (/1000 hbts).'
                 : 'Survolez une zone');
         };
 
@@ -67,6 +67,7 @@ var mapL;
     var geojson;
     var departementgeojson;
     var communegeojson;
+    var codedep;
 
     // Listeners
 
@@ -139,6 +140,7 @@ var mapL;
 
         // Si je clique sur un département
         if(inLayer(e.target, departementgeojson)) {
+            codedep = code;
             clearCommune();
             // Si l'ancien layer communes existe, le supprimer
             if(mapL.hasLayer(communegeojson)) {
@@ -185,9 +187,11 @@ var mapL;
     /// =======================   refresh pour une activité donnée
 
     function refresh(anActivite) {
+        clearCommune();
         geojson = null;
         departementgeojson = null;
         communegeojson = null;
+        codedep = null;
         activite = anActivite;
         //console.log(mapL);
         if(mapL != null) {
@@ -269,9 +273,11 @@ var mapL;
                     activite: activite,
                     ou: o.properties.code
                 }, function(resultat) {
-                console.log(resultat);
-                o.properties.ratio = resultat.ratio;
+                //console.log(resultat);
+                o.properties.ratio = Math.ceil(resultat.ratio*1000)/1000;
+                //o.properties.ratio = (resultat.nbPro*1000.0)/resultat.population;
                 o.properties.population = resultat.population;
+                o.properties.nbPro = resultat.nbPro;
                 finish();
             });
         });
@@ -283,11 +289,21 @@ var mapL;
     /// Affichage du cartouche de la commune
 
     function displayCommune(props) {
-        // TODO
-        console.log("Afficher le cartouche de la commune");
+        console.log(props.nom);
+        $('#commune').html(props.nom);
+        $('#nbpro').find('.value').html(props.nbPro);
+        $('#population .value').html(props.population);
+        $('#densite .value').html(props.ratio);
+
+        // Lien vers PJ LR
+        var urlpjlr = 'http://www.pagesjaunes.fr/annuaire/'+props.nom+'-'+codedep+'/'+activite;
+        $('#lr-pj').attr('href', urlpjlr);
+
+        $('.area-result').show();
+        //console.log("Afficher le cartouche de la commune");
     }
 
     function clearCommune() {
-        // TODO
-        console.log("Nettoyer le cartouche de la commune");
+        $('.area-result').hide();
+        //console.log("Nettoyer le cartouche de la commune");
     }
