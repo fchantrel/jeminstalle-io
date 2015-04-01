@@ -8,4 +8,10 @@ import io.jeminstalle.domain.DataPro;
 public interface DataProService {
 
     DataPro getDataPro(String activite, String ou);
+    
+    DataPro getDataProByRegion(String activite, String ou);
+    
+    DataPro getDataProByDepartement(String activite, String ou);
+    
+    DataPro getDataProByCommune(String activite, String ou);
 }

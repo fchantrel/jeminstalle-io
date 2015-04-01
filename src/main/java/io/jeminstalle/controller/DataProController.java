@@ -19,10 +19,21 @@ public class DataProController {
     @Autowired
     private DataProService dataProService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public DataPro findData(@RequestParam("activite") String activite, @RequestParam("ou") String ou) {
-        return dataProService.getDataPro(activite, ou);
+    @RequestMapping(value = "/region", method = RequestMethod.GET)
+    public DataPro findDataByRegion(@RequestParam("activite") String activite, @RequestParam("ou") String ou) {
+        
+        return dataProService.getDataProByRegion(activite, ou);
     }
-
-
+    
+    @RequestMapping(value = "/departement", method = RequestMethod.GET)
+    public DataPro findDataByDepartement(@RequestParam("activite") String activite, @RequestParam("ou") String ou) {
+        
+        return dataProService.getDataProByDepartement(activite, ou);
+    }
+    
+    @RequestMapping(value = "/commune", method = RequestMethod.GET)
+    public DataPro findDataByCommune(@RequestParam("activite") String activite, @RequestParam("ou") String ou) {
+        
+        return dataProService.getDataProByCommune(activite, ou);
+    }
 }
