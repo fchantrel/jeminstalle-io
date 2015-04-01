@@ -20,6 +20,9 @@
   }
   
   // CONTAINER
+  .area-result {
+    margin-top: -150px;
+  }
   .bloc {
     border: 1px solid #ddd;
     box-shadow: none;
@@ -39,7 +42,6 @@
     & > * {
       @include inline-block( middle );
     }
-    
   }
   
   .glyph-icon {
