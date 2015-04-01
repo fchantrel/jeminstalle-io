@@ -172,6 +172,7 @@ function updateMap(  oRefGeo ){
 }
 
 function insertRating( sJqSelector ){
+    $(sJqSelector).remove('.rating');
     $( '<span class="rating"><span></span></span>' ).appendTo( sJqSelector );
 }
 
