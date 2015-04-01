@@ -18,9 +18,9 @@ function showMapIcon( lat, lng, sType, sEtabName )
 {
     var LeafIcon = L.Icon.extend({
         options: {
-            iconSize:     [32, 32],
-            iconAnchor:   [22, 94],
-            popupAnchor:  [-3, -76]
+            iconSize:     [16, 16],
+            iconAnchor:   [8, 8],
+            popupAnchor:  [0, -8]
             //shadowUrl: '../docs/images/leaf-shadow.png',
             // shadowSize:   [32, 32],
             // shadowAnchor: [4, 62],
@@ -36,18 +36,20 @@ function showMapIcon( lat, lng, sType, sEtabName )
             sImage = 'Medecin1.png';
             break;
         case 'pharmacies':
-            sImage = 'pharmacie1.png';
+            sImage = 'pharmacie.png';
             break;
         case 'ecoles':
             sImage = 'ecole.png';
+            break;
+        case 'transports':
+            sImage = 'bus.png';
             break;
         case 'bars':
             sImage = 'juice2.png';
             break;
         default :
-            sImage = 'map-pointer7.png';
+            sImage = 'map-pointer-yellow.png';
             break;
-
     }
 
     var jeminstalleIO_Icon = new LeafIcon({iconUrl: 'assets/img/'+sImage});
@@ -65,12 +67,27 @@ function displayActivitePoi(  sActiviteLib, oDatasActivite )
     for(var i=0; i<aEtablissements.length; i++)
     {
         oEtab = aEtablissements[i];
-
         var sEtabName = oEtab._source.intlprincipal;
         var lat = oEtab._source.proGeoCoord.lat;
         var lon = oEtab._source.proGeoCoord.lon;
         console.log('sEtabName : '+sEtabName+' - lat : '+lat+' lon : '+lon+' - sActiviteLib : '+sActiviteLib);
+
         showMapIcon( lat, lon, sActiviteLib, sEtabName );
+    }
+}
+//======================================================================================
+function displayTransportsPoi( aDatasTransports )
+{
+
+    for(var i=0; i<aDatasTransports.length; i++)
+    {
+        oArret = aDatasTransports[i];
+        var sNomArret = oArret.nom+' - '+oArret.ligne;
+        var lat = oArret.latitude;
+        var lon = oArret.longitude;
+        console.log('sEtabName : '+sNomArret+' - lat : '+lat+' lon : '+lon+' - sActiviteLib : Transports');
+
+        showMapIcon( lat, lon, 'transports', sNomArret );
     }
 }
 
@@ -103,6 +120,9 @@ function displayEnvironnement( oDatas )
         displayActivitePoi(  aActivites[i], oDatasActivite );
     }
 
+    displayTransportsPoi( oDatas.transports , oDatasActivite );
+
+
     //Affichage des infos de pollution
     displayPollution(  oDatas.pollution );
 
@@ -114,6 +134,9 @@ function displayEnvironnement( oDatas )
 
     //Affichage des infos de Précipitations
     displayPrecipitation(  oDatas.precipitation );
+
+    //Affichage des infos d'Ensoleillement
+    displayEnsoleillement(  oDatas.ensoleillement );
 
     //Affichage des infos de Nucléaire
     displayNucleaire(  oDatas.nucleaire );
@@ -127,13 +150,19 @@ function updateMap(  oRefGeo ){
     return map.setView([lat, lng], 13);
 }
 
+function insertRating( sJqSelector ){
+    $( '<span class="rating"><span></span></span>' ).appendTo( sJqSelector );
+}
+
+
 // Affichage du nombre de sites pollués
 function displayPollution(   oDatasPollution ) {
     var iClassmt = oDatasPollution.classement;
-    var sNiveau = 'niveau-'+ Math.ceil( iClassmt/20 );
+    var sNiveau = 'niveau-'+ Math.ceil( (100-iClassmt)/20 );
     $("#nbSitesPollues")
         .attr("class", sNiveau )
         .find('span.value').html( ' : '+oDatasPollution.nbsitespolues );
+    insertRating( "#nbSitesPollues" );
 }
 
 
@@ -151,10 +180,11 @@ function displayRevenuMoyen(  oDatasRevenuMoyen )
 {
     var iNbCommunesEnFrance = 36552;
     var iClassmt = oDatasRevenuMoyen.classement;
-    var sNiveau = 'niveau-'+ Math.ceil( iClassmt/iNbCommunesEnFrance );
+    var sNiveau = 'niveau-'+ Math.ceil( (iClassmt/iNbCommunesEnFrance)*5 );
     $("#revenuMoyen")
         .attr("class", sNiveau )
         .find('span.value').html( ' : '+oDatasRevenuMoyen.revenu+' &euro;/an' );
+    insertRating( "#revenuMoyen" );
 }
 
 //Affichage des infos de Précipitations
@@ -162,10 +192,23 @@ function displayPrecipitation(  oDatasPrecipitation )
 {
     var iNbDepEnFrance = 101;
     var iClassmt = oDatasPrecipitation.classement;
-    var sNiveau = 'niveau-'+ Math.ceil( iClassmt/iNbDepEnFrance );
+    var sNiveau = 'niveau-'+ Math.ceil( ( (iNbDepEnFrance-iClassmt)/iNbDepEnFrance)*5 );
     $("#pluviometrie")
         .attr("class", sNiveau )
-        .find('span.value').html( ' : '+oDatasPrecipitation.precipitation+' ??/an' );
+        .find('span.value').html( ' : '+oDatasPrecipitation.precipitation+' mm/an' );
+    insertRating( "#pluviometrie" );
+}
+//Affichage des infos de Précipitations
+function displayEnsoleillement(  oDatasEnsoleillement )
+{
+    var iNbDepEnFrance = 101;
+    var iClassmt = oDatasEnsoleillement.classement;
+    var sNiveau = 'niveau-'+ Math.ceil( ( (iNbDepEnFrance-iClassmt)/iNbDepEnFrance)*5 );
+    var iEnsoleillement = ( oDatasEnsoleillement.ensoleillement / 12 );
+    $("#ensoleillement")
+        .attr("class", sNiveau )
+        .find('span.value').html( ' : '+iEnsoleillement+' j/an' );
+    insertRating( "#ensoleillement" );
 }
 
 //Affichage des infos de Nucléaire
@@ -183,9 +226,15 @@ function initFormSearch(){
         e.preventDefault();
         // var sVille = $('#search').val();
         var sVille = 'rennes';//on triche !
-        $.getJSON( "../../../dataparticulier_ville_"+sVille+".json", function( data ) {
+        var sBaseUrl = 'http://192.168.161.62:8080/dataparticulier/ville/';
+
+        $.getJSON( sBaseUrl+sVille, function( data ) {
             displayEnvironnement(data);
         });
+
+        // $.getJSON( "../../../dataparticulier_ville_"+sVille+".json", function( data ) {
+        //     displayEnvironnement(data);
+        // });
     });
 }
 
