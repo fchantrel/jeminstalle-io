@@ -11,6 +11,7 @@ public class DataParticulier {
     private RevenuMoyen revenuMoyen;
     private Precipitation precipitation;
     private Nucleaire nucleaire;
+    private Ensoleillement ensoleillement;
 
     private List<Transport> transports = new ArrayList<>();
 
@@ -18,6 +19,15 @@ public class DataParticulier {
     private String pharmacies;
     private String ecoles;
     private String bars;
+
+
+    public Ensoleillement getEnsoleillement() {
+        return ensoleillement;
+    }
+
+    public void setEnsoleillement(Ensoleillement ensoleillement) {
+        this.ensoleillement = ensoleillement;
+    }
 
     public List<Transport> getTransports() {
         return transports;

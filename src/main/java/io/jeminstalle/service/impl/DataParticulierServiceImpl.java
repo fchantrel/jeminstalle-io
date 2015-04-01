@@ -128,9 +128,9 @@ public class DataParticulierServiceImpl implements DataParticulierService {
         t.setLongitude(-1.609444f);
         t.setLatitude(48.23472f);
         dp.getTransports().add(t);
+
         t = new Transport();
         t.setLigne("ligne B");
-
         t.setNom("arret 3");
         t.setLongitude(-1.619444f);
         t.setLatitude(48.24472f);
@@ -143,6 +143,7 @@ public class DataParticulierServiceImpl implements DataParticulierService {
         precipitation.convertirEnMm();
         dp.setPrecipitation(precipitation);
         dp.setNucleaire(nucleaire);
+        dp.setEnsoleillement(ensoleillement);
 
 
         String distanceKM = "12";

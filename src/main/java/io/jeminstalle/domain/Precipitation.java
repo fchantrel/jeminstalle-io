@@ -22,8 +22,9 @@ public class Precipitation {
         double metreCubeEauParKMMetreCarreSurface = Double.valueOf(precipitation) / 5000; // surface moyenne departement
         double metreCubeEauParMetreCarre = metreCubeEauParKMMetreCarreSurface / (1000 * 1000);
         double litreEauParMetreCarre = metreCubeEauParMetreCarre * 1000;
-        precipitation = String.valueOf(litreEauParMetreCarre);
+        precipitation = String.valueOf(Math.round(litreEauParMetreCarre));
     }
+
 
     public String getId() {
         return id;
