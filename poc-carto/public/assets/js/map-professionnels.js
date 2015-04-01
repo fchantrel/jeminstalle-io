@@ -222,13 +222,19 @@ var mapL;
     }
 
     function enrichissementDepartements(data, callback) {
-        //enrichissement(datapro+'departement',data, callback);
-        mock(data,callback);
+        if(activite.length>0) {
+            enrichissement(datapro+'departement',data, callback);
+        } else {
+            mock(data,callback);
+        }
     }
 
     function enrichissementCommunes(data, callback) {
-        //enrichissement(datapro+'commune',data, callback);
-        mock(data,callback);
+        if(activite.length>0) {
+            enrichissement(datapro+'commune',data, callback);
+        } else {
+            mock(data,callback);
+        }
     }
 
     function mock(data, callback) {

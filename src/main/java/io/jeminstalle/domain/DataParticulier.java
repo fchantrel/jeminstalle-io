@@ -14,11 +14,6 @@ public class DataParticulier {
     private String ecoles;
     private String bars;
 
-//    private List<Pro> pharmacies = new ArrayList<>();
-//    private List<Pro> boulangeries = new ArrayList<>();
-//    private List<Pro> ecoles = new ArrayList<>();
-//    private List<Pro> bars = new ArrayList<>();
-
 
     public String getPharmacies() {
         return pharmacies;
@@ -101,35 +96,4 @@ public class DataParticulier {
         this.revenuMoyen = revenuMoyen;
     }
 
-//    public List<Pro> getPharmacies() {
-//        return pharmacies;
-//    }
-//
-//    public void setPharmacies(List<Pro> pharmacies) {
-//        this.pharmacies = pharmacies;
-//    }
-//
-//    public List<Pro> getBoulangeries() {
-//        return boulangeries;
-//    }
-//
-//    public void setBoulangeries(List<Pro> boulangeries) {
-//        this.boulangeries = boulangeries;
-//    }
-//
-//    public List<Pro> getEcoles() {
-//        return ecoles;
-//    }
-//
-//    public void setEcoles(List<Pro> ecoles) {
-//        this.ecoles = ecoles;
-//    }
-//
-//    public List<Pro> getBars() {
-//        return bars;
-//    }
-//
-//    public void setBars(List<Pro> bars) {
-//        this.bars = bars;
-//    }
 }

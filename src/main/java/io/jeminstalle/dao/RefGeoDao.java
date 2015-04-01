@@ -13,4 +13,6 @@ public interface RefGeoDao extends ElasticsearchRepository<RefGeo, String> {
     // FIXME : réussir à faire un size=1 (top et first ne fonctionnent pas)
     List<RefGeo> findByName(String name);
 
+    List<RefGeo> findByLatitudeAndLongitude(float latitude, float longitude);
+
 }

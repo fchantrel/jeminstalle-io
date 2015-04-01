@@ -8,4 +8,6 @@ import io.jeminstalle.domain.DataParticulier;
 public interface DataParticulierService {
 
     DataParticulier getDataParticulierByName(String name);
+
+    DataParticulier getDataParticulierByPosition(String latitude, String longitude);
 }
