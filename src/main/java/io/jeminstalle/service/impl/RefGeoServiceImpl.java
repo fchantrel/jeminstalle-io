@@ -6,6 +6,8 @@ import io.jeminstalle.service.RefGeoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by raphael on 31/03/2015.
  */
@@ -17,6 +19,19 @@ public class RefGeoServiceImpl implements RefGeoService {
 
     @Override
     public RefGeo getRefGeoByName(String name) {
-        return refGeoDao.findByName(name).get(0);
+
+        // FIXME : on ne retourne que les references qui ont un zipcode
+        List<RefGeo> refGeoList = refGeoDao.findByName(name);
+
+        for (RefGeo refGeo : refGeoList) {
+            if (refGeo.getZipcode() != null) {
+                return refGeo;
+            }
+        }
+
+        // FIXME
+        RefGeo rg = refGeoList.get(0);
+        rg.setZipcode("75000");
+        return rg;
     }
 }
