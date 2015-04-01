@@ -5,7 +5,8 @@
     }
 
     .content {
-        height: calc(100% - 100px);
+      font-family: $dilo-light;
+      height: calc(100% - 103px);
 
         .area-choose{
             height: 100%;
@@ -43,13 +44,74 @@
                     &:last-child {
                         margin-left: 0;
                     }
+                  
+                    // Professionnels
+                    &#professionnel {
+                      background: $white;
+                      
+                      &,
+                      a {
+                        color: $blue-2;
+                      }
+                      
+                      // AU HOVER
+                      &:hover {
 
-                    &#particulier {
-                        background-color: $blue;
+                        &,
                         a {
-                            color: $white;
+                          background: $blue-2;
+                          color: $white;
                         }
+                        
+                        // Block Particulier
+                        & + #particulier.bloc {
+                          &,
+                          a {
+                            background: $white;
+                            color: $blue-2;
+                          }
+                        }
+                      }
                     }
+
+                    // Particulier
+                    &#particulier {
+                      
+                      &,
+                      a {
+                        background: $blue-2;
+                        color: $white;
+                      }
+                      
+                      
+                      
+                      /*
+                      a:hover,
+                      &:hover {
+                        background: #2196f3;
+                        color: $white;
+                      }
+                      */
+                    }
+                  
+                  
+                  a {
+                    &:hover,
+                    &:focus {
+                      text-decoration: none;
+                    }
+                  }
+                  
+                  .glyph-icon {
+                    &:after,
+                    &:before {
+                      font-size: 100px;
+                    }
+                  }
+                  
+                  .text {
+                    display: block;
+                  }
                 }
             }
         }
