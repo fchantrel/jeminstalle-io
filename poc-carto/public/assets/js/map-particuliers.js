@@ -88,8 +88,8 @@ function displayTransportsPoi( aDatasTransports )
     {
         oArret = aDatasTransports[i];
         var sNomArret = oArret.nom+' - '+oArret.ligne;
-        var lat = oArret.latitude;
-        var lon = oArret.longitude;
+        var lat = oArret.location.lat;
+        var lon = oArret.location.lon;
         console.log('sEtabName : '+sNomArret+' - lat : '+lat+' lon : '+lon+' - sActiviteLib : Transports');
 
         showMapIcon( lat, lon, 'transports', sNomArret );
@@ -127,8 +127,8 @@ function displayEnvironnement( oDatas )
         }
     }
 
-    if( 'undefined' != typeof(oDatas.transports) ){
-        displayTransportsPoi( oDatas.transports , oDatasActivite );
+    if( 'undefined' != typeof(oDatas.starbuses) ){
+        displayTransportsPoi( oDatas.starbuses );
     }
 
 
@@ -138,8 +138,8 @@ function displayEnvironnement( oDatas )
     }
 
     //Affichage des infos de couverture4G
-    if( 'undefined' != typeof(oDatas.pollution) ){
-        displayCouverture4G(  oDatas.pollution );
+    if( 'undefined' != typeof(oDatas.couverture4G) ){
+        displayCouverture4G(  oDatas.couverture4G );
     }
 
     //Affichage des infos de Revenu Moyen
@@ -245,9 +245,10 @@ function initFormSearch(){
     $("#searchForm").on('submit', function(e){
 
         e.preventDefault();
-        // var sVille = $('#search').val();
-        var sVille = 'rennes';//on triche !
-        var sBaseUrl = 'http://192.168.161.62:8080/dataparticulier/ville/';
+        var sVille = $('#search').val();
+        //var sVille = 'rennes';//on triche !
+        //var sBaseUrl = 'http://192.168.161.62:8080/dataparticulier/ville/';
+        var sBaseUrl = 'http://localhost:8080/dataparticulier/ville/';
 
         $.getJSON( sBaseUrl+sVille, function( data ) {
             displayEnvironnement(data);
