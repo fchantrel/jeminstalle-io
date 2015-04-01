@@ -13,7 +13,7 @@ public class DataParticulier {
     private Nucleaire nucleaire;
     private Ensoleillement ensoleillement;
 
-    private List<Transport> transports = new ArrayList<>();
+    private List<Starbus> starbuses = new ArrayList<>();
 
     private String boulangeries;
     private String pharmacies;
@@ -29,12 +29,12 @@ public class DataParticulier {
         this.ensoleillement = ensoleillement;
     }
 
-    public List<Transport> getTransports() {
-        return transports;
+    public List<Starbus> getStarbuses() {
+        return starbuses;
     }
 
-    public void setTransports(List<Transport> transports) {
-        this.transports = transports;
+    public void setStarbuses(List<Starbus> starbuses) {
+        this.starbuses = starbuses;
     }
 
     public String getPharmacies() {
