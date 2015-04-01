@@ -25,7 +25,7 @@ var mapL;
             opacity: 1,
             color: 'white',
             dashArray: '3',
-            fillOpacity: 0.7
+            fillOpacity: 0.5
         };
     }
 
