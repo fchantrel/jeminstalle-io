@@ -214,17 +214,20 @@ var mapL;
     /// callback est une fonction qui prend la data paramètre
 
     function enrichissementRegions(data, callback) {
-        //enrichissement(data, callback);
-        mock(data,callback);
+        if(activite.length>0) {
+            enrichissement(datapro+'region',data, callback);
+        } else {
+            mock(data,callback);
+        }
     }
 
     function enrichissementDepartements(data, callback) {
-        //enrichissement(data, callback);
+        //enrichissement(datapro+'departement',data, callback);
         mock(data,callback);
     }
 
     function enrichissementCommunes(data, callback) {
-        //enrichissement(data, callback);
+        //enrichissement(datapro+'commune',data, callback);
         mock(data,callback);
     }
 
@@ -239,7 +242,7 @@ var mapL;
         callback(data);
     }
 
-    function enrichissement(data, callback) {
+    function enrichissement(apiratio, data, callback) {
 
         // Ici un exemple ou on enrichit le json avec
         // les données de population et le ratio pour la carte
@@ -255,9 +258,9 @@ var mapL;
         }
         
         data.features.forEach( function (o) {
-            $.getJSON(datapro,
+            $.getJSON(apiratio,
                 {
-                    activite: "pompe funebre",
+                    activite: activite,
                     ou: o.properties.code
                 }, function(resultat) {
                 console.log(resultat);
