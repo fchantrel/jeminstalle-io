@@ -19,12 +19,6 @@ public class Starbus {
     private GeoPoint location;
 
 
-    public void convertLigneBus() {
-        if (ligne.contains(".")) {
-            ligne = ligne.split(".")[0];
-        }
-    }
-
     public String getId() {
         return id;
     }

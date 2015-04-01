@@ -96,9 +96,6 @@ public class DataParticulierServiceImpl implements DataParticulierService {
         Nucleaire nucleaire = nucleaireDAO.findByNumdep(departement);
 
         List<Starbus> starbuses = starbusDAO.findByLatitudeAndLongitude(latitude, longitude, distanceKM);
-        for (Starbus t : starbuses) {
-            t.convertLigneBus();
-        }
         dp.getStarbuses().addAll(starbuses);
 
         dp.setPollution(pollution);
