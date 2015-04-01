@@ -21,6 +21,9 @@ public class DataParticulierServiceImpl implements DataParticulierService {
     private PollutionDAO pollutionDAO;
 
     @Autowired
+    private TransportDAO transportDAO;
+
+    @Autowired
     private Couverture4GDAO couverture4GDAO;
 
     @Autowired
@@ -34,7 +37,6 @@ public class DataParticulierServiceImpl implements DataParticulierService {
 
     @Autowired
     private NucleaireDAO nucleaireDAO;
-
 
     @Autowired
     private ProDAO proDAO;
@@ -89,9 +91,56 @@ public class DataParticulierServiceImpl implements DataParticulierService {
         Precipitation precipitation = precipitationDAO.findByNodepartement(departement);
         Nucleaire nucleaire = nucleaireDAO.findByNumdep(departement);
 
+        //List<Transport> transports = transportDAO.findByLatitudeAndLongitude(latitude, longitude);
+        //dp.getTransports().addAll(transports);
+
+        Transport t = new Transport();
+        t.setLigne("ligne A");
+        t.setNom("arret 1");
+        t.setLongitude(-1.679444f);
+        t.setLatitude(48.11472f);
+        dp.getTransports().add(t);
+
+        t = new Transport();
+        t.setLigne("ligne A");
+        t.setNom("arret 2");
+        t.setLongitude(-1.689444f);
+        t.setLatitude(48.11472f);
+        dp.getTransports().add(t);
+
+        t = new Transport();
+        t.setLigne("ligne A");
+        t.setNom("arret 3");
+        t.setLongitude(-1.699444f);
+        t.setLatitude(48.12472f);
+        dp.getTransports().add(t);
+
+        t = new Transport();
+        t.setLigne("ligne B");
+        t.setNom("arret 1");
+        t.setLongitude(-1.599444f);
+        t.setLatitude(48.22472f);
+        dp.getTransports().add(t);
+
+        t = new Transport();
+        t.setLigne("ligne B");
+        t.setNom("arret 2");
+        t.setLongitude(-1.609444f);
+        t.setLatitude(48.23472f);
+        dp.getTransports().add(t);
+        t = new Transport();
+        t.setLigne("ligne B");
+
+        t.setNom("arret 3");
+        t.setLongitude(-1.619444f);
+        t.setLatitude(48.24472f);
+        dp.getTransports().add(t);
+
+
         dp.setPollution(pollution);
         dp.setCouverture4G(couverture4G);
         dp.setRevenuMoyen(revenuMoyen);
+        precipitation.convertirEnMm();
         dp.setPrecipitation(precipitation);
         dp.setNucleaire(nucleaire);
 
@@ -100,6 +149,9 @@ public class DataParticulierServiceImpl implements DataParticulierService {
         String maxResultat = "10";
 
         String boulangeriesJSON = proDAO.findByCoordonneesAndRubrique(String.valueOf(latitude), String.valueOf(longitude), "boulangerie", distanceKM, maxResultat);
+
+        System.out.println(boulangeriesJSON);
+
         String pharmacieJSON = proDAO.findByCoordonneesAndRubrique(String.valueOf(latitude), String.valueOf(longitude), "pharmacie", distanceKM, maxResultat);
         String barJSON = proDAO.findByCoordonneesAndRubrique(String.valueOf(latitude), String.valueOf(longitude), "bar", distanceKM, maxResultat);
         String ecoleJSON = proDAO.findByCoordonneesAndRubrique(String.valueOf(latitude), String.valueOf(longitude), "ecole primaire", distanceKM, maxResultat);

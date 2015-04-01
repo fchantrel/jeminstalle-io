@@ -1,5 +1,8 @@
 package io.jeminstalle.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DataParticulier {
 
     private RefGeo refGeo;
@@ -9,11 +12,20 @@ public class DataParticulier {
     private Precipitation precipitation;
     private Nucleaire nucleaire;
 
+    private List<Transport> transports = new ArrayList<>();
+
     private String boulangeries;
     private String pharmacies;
     private String ecoles;
     private String bars;
 
+    public List<Transport> getTransports() {
+        return transports;
+    }
+
+    public void setTransports(List<Transport> transports) {
+        this.transports = transports;
+    }
 
     public String getPharmacies() {
         return pharmacies;

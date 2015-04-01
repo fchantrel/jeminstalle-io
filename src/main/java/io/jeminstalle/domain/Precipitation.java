@@ -13,9 +13,17 @@ public class Precipitation {
     @Id
     private String id;
     private String classement;
-    private String precipitation;
+    private String precipitation; // en metre cube pour le departement
     private String libelledepartement;
     private String nodepartement;
+
+
+    public void convertirEnMm() {
+        double metreCubeEauParKMMetreCarreSurface = Double.valueOf(precipitation) / 5000; // surface moyenne departement
+        double metreCubeEauParMetreCarre = metreCubeEauParKMMetreCarreSurface / (1000 * 1000);
+        double litreEauParMetreCarre = metreCubeEauParMetreCarre * 1000;
+        precipitation = String.valueOf(litreEauParMetreCarre);
+    }
 
     public String getId() {
         return id;

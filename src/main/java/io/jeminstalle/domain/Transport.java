@@ -1,45 +1,51 @@
 package io.jeminstalle.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+
 /**
  * Created by raphael on 31/03/2015.
  */
+@Document(indexName = "jeminstalle", type = "transport", shards = 1, replicas = 0, refreshInterval = "-1")
 public class Transport {
 
+    @Id
+    private String id;
 
-    private String type;
-    private String libelle;
-    private String longitude;
-    private String latidude;
+    private String nom;
+    private String ligne;
+    private float longitude;
+    private float latitude;
 
-    public String getType() {
-        return type;
+    public String getNom() {
+        return nom;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    public String getLibelle() {
-        return libelle;
+    public String getLigne() {
+        return ligne;
     }
 
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
+    public void setLigne(String ligne) {
+        this.ligne = ligne;
     }
 
-    public String getLongitude() {
+    public float getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(float longitude) {
         this.longitude = longitude;
     }
 
-    public String getLatidude() {
-        return latidude;
+    public float getLatitude() {
+        return latitude;
     }
 
-    public void setLatidude(String latidude) {
-        this.latidude = latidude;
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
     }
 }
