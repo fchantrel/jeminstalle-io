@@ -2,8 +2,8 @@ package io.jeminstalle.dao.impl;
 
 import io.jeminstalle.dao.ProDAO;
 import io.jeminstalle.domain.DenombrementES;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -43,12 +43,20 @@ public class ProDAOImpl implements ProDAO {
     @Override
     public int findByCommuneAndActivite(String commune, String activite, String maxResultat) {
 
-        String communeFormatee = StringUtils.replace(commune, "-", " ");
+        String communeFormatee = StringUtils.stripAccents(commune);
+        if (communeFormatee.length() < 1) {
+            communeFormatee = "cesson sevigne";
+        }
 
         String s = "{\"query\": {\"bool\": {\"must\": [{\"multi_match\": {\"query\":\"" + activite + "\",\"fields\": [\"epj.denom\",\"epj.cpldenom\",\"parutions.parutionrubriques.rubrique.content\"]}},{\"multi_match\": {\"query\":\"" + communeFormatee + "\",\"fields\": [\"epj.libloc\"]}}]}}}";
-        DenombrementES retour = restTemplate.postForObject("http://" + IP.IP + ":9200/slev8epj/blocsepj/_count", s, DenombrementES.class);
-        System.out.println("Requete : " + s);
-        System.out.println("commune : " + communeFormatee);
+        DenombrementES retour = new DenombrementES();
+        try {
+            retour = restTemplate.postForObject("http://" + IP.IP + ":9200/slev8epj/blocsepj/_count", s, DenombrementES.class);
+        } catch (Exception e) {
+            System.out.println("Libelle commune : " + communeFormatee);
+            System.out.println("Requete : " + s);
+            e.printStackTrace();
+        }
         return retour.getCount();
     }
 }

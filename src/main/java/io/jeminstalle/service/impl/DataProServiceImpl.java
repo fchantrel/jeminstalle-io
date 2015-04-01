@@ -106,13 +106,11 @@ public class DataProServiceImpl implements DataProService {
 	        	}
 	            
 	        	int nbProParActiviteParRegion = proDAO.findByRegionAndActivite(ou, activite, "1");
-	        	System.out.println("service : " + nbProParActiviteParRegion);
 	        	
 	            dp.setNbPro(nbProParActiviteParRegion);
 	            if(dp.getPopulation() > 0) {
 	            	double ratio = ((double)(nbProParActiviteParRegion)) / ((double)dp.getPopulation()) * 1000; 
 		            dp.setRatio(ratio);
-		            System.out.println("ratio :" + ratio);
 	            } else {
 	            	dp.setRatio(0.123);
 	            }
@@ -141,13 +139,11 @@ public class DataProServiceImpl implements DataProService {
         	}
             
         	int nbProParActiviteParDepartement = proDAO.findByDepartementAndActivite(ou, activite, "1");
-        	System.out.println("service dep: " + nbProParActiviteParDepartement);
         	
             dp.setNbPro(nbProParActiviteParDepartement);
             if(dp.getPopulation() > 0) {
             	double ratio = ((double)(nbProParActiviteParDepartement)) / ((double)dp.getPopulation()) * 1000; 
 	            dp.setRatio(ratio);
-	            System.out.println("ratio :" + ratio);
             } else {
             	dp.setRatio(0.123);
             }
@@ -181,13 +177,11 @@ public class DataProServiceImpl implements DataProService {
         	}
         	
         	int nbProParActiviteParCommune = proDAO.findByCommuneAndActivite(ouTrouve, activite, "1");
-        	System.out.println("service commune: " + nbProParActiviteParCommune);
         	
             dp.setNbPro(nbProParActiviteParCommune);
             if(dp.getPopulation() > 0) {
             	double ratio = ((double)(nbProParActiviteParCommune)) / ((double)dp.getPopulation()) * 1000; 
 	            dp.setRatio(ratio);
-	            System.out.println("ratio :" + ratio);
             } else {
             	dp.setRatio(0.123);
             }

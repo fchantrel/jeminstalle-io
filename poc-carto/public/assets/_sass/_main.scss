@@ -44,9 +44,9 @@
       padding: 0 14px;
       width: 100%;
       //@include materialDesignBox();
-    }
+  }
 
-    .btn-submit {
+  .btn-submit {
       //height: 50px;
       font-weight: normal;
       border-radius: 0;
@@ -57,44 +57,44 @@
       @include font-size( 1.4 ); // =14px
       background: $yellow;
       font-weight: bold;
-    }
-    .actions {
+  }
+  .actions {
       @include font-size( 1.3 ); // =13px
-      
+
       a {
         padding-left: 4px;
-      }
     }
+}
 
+
+#compareForm {
+    display: none;
+
+    input[type="search"]{
+        margin-bottom: .2rem;
+    }
+    .actions {
+        > * {
+            display: inline-block;
+        }
+        > a {
+            width: 60%;
+        }
+        > button {
+            width: 34%;
+        }
+    }
+}
+
+&.compare {
 
     #compareForm {
+        display: block;
+    }
+    #searchForm{
         display: none;
-
-        input[type="search"]{
-            margin-bottom: .2rem;
-        }
-        .actions {
-            > * {
-                display: inline-block;
-            }
-            > a {
-                width: 60%;
-            }
-            > button {
-                width: 34%;
-            }
-        }
     }
-
-    &.compare {
-
-        #compareForm {
-            display: block;
-        }
-        #searchForm{
-            display: none;
-        }
-    }
+}
 
 
 }
@@ -136,10 +136,10 @@
     .container {
       background: rgba( 255, 255, 255, 0.5 );
       padding: 15px;
-        max-width: 970px;
+      max-width: 970px;
         // display: table;
     }
-   
+
     .bloc {
       background: $white;
       display: inline-block;
@@ -166,6 +166,51 @@
       > .bloc-title {
           margin: 0 0 .5rem 0;
       }
-    }   
-   
+  }
+
+}
+
+//----------------------------------------
+// Rating --
+.rating {
+
+    display:none;
+    vertical-align: middle;
+    background: transparent url(../img/star-off.png) 0 0 repeat-x;
+    margin: 0 .5rem;
+    width:100px;
+    height: 16px;
+
+    .niveau-1 &,
+    .niveau-2 &,
+    .niveau-3 &,
+    .niveau-4 &,
+    .niveau-5 & {
+        display: inline-block;
+    }
+
+
+    > span {
+        background: transparent url(../img/star-on.png) 0 0 repeat-x;
+        display: inline-block;
+        position: relative;
+        height: 20px;
+        width: 0;
+
+        .niveau-1 & {
+            width: 20px;
+        }
+        .niveau-2 & {
+            width: 40px;
+        }
+        .niveau-3 & {
+            width: 60px;
+        }
+        .niveau-4 & {
+            width: 80px;
+        }
+        .niveau-5 & {
+            width: 100px;
+        }
+    }
 }
