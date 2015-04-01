@@ -6,6 +6,8 @@ import io.jeminstalle.service.DataParticulierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by raphael on 31/03/2015.
  */
@@ -37,10 +39,25 @@ public class DataParticulierServiceImpl implements DataParticulierService {
     @Autowired
     private ProDAO proDAO;
 
+    //FIXME
+    private RefGeo getRefGeoContainsZipCodeOnly(List<RefGeo> refGeoList) {
+        for (RefGeo refGeo : refGeoList) {
+            if (refGeo.getZipcode() != null) {
+                return refGeo;
+            }
+        }
+        // FIXME
+        RefGeo rg = refGeoList.get(0);
+        rg.setZipcode("75000");
+        return rg;
+    }
+
     @Override
     public DataParticulier getDataParticulierByName(String name) {
 
-        RefGeo refGeo = refGeoDao.findByName(name).get(0);
+        List<RefGeo> refGeos = refGeoDao.findByName(name);
+        RefGeo refGeo = getRefGeoContainsZipCodeOnly(refGeos);
+
         DataParticulier dp = getDataParticulier(refGeo, name, refGeo.getLatitude(), refGeo.getLongitude());
 
         return dp;
@@ -50,7 +67,9 @@ public class DataParticulierServiceImpl implements DataParticulierService {
     @Override
     public DataParticulier getDataParticulierByPosition(String latitude, String longitude) {
 
-        RefGeo refGeo = refGeoDao.findByLatitudeAndLongitude(Float.valueOf(latitude), Float.valueOf(longitude)).get(0);
+        List<RefGeo> refGeos = refGeoDao.findByLatitudeAndLongitude(Float.valueOf(latitude), Float.valueOf(longitude));
+        RefGeo refGeo = getRefGeoContainsZipCodeOnly(refGeos);
+
         DataParticulier dp = getDataParticulier(refGeo, refGeo.getName(), refGeo.getLatitude(), refGeo.getLongitude());
 
         return dp;
