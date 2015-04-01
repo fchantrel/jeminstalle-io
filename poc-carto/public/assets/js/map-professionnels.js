@@ -1,5 +1,5 @@
 var jsonBasePath = '../../';
-var springhost = '192.168.160.227';
+var springhost = 'localhost';
 var datapro = 'http://'+springhost+':8080/datapro/';
 
 var activite;
