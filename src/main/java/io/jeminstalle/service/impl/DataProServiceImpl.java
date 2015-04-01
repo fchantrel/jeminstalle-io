@@ -106,13 +106,15 @@ public class DataProServiceImpl implements DataProService {
 	        	}
 	            
 	        	int nbProParActiviteParRegion = proDAO.findByRegionAndActivite(ou, activite, "1");
+	        	System.out.println("service : " + nbProParActiviteParRegion);
 	        	
 	            dp.setNbPro(nbProParActiviteParRegion);
 	            if(dp.getPopulation() > 0) {
-	            	double ratio = nbProParActiviteParRegion * 1000 / dp.getPopulation(); 
+	            	double ratio = ((double)(nbProParActiviteParRegion)) / ((double)dp.getPopulation()) * 1000; 
 		            dp.setRatio(ratio);
+		            System.out.println("ratio :" + ratio);
 	            } else {
-	            	dp.setRatio(1.123);
+	            	dp.setRatio(0.123);
 	            }
 	        } catch(Exception e){
 	        	e.printStackTrace();
@@ -138,8 +140,17 @@ public class DataProServiceImpl implements DataProService {
         		dp.setPopulation(10000);
         	}
             
-            dp.setNbPro(10);
-            dp.setRatio(1.123);
+        	int nbProParActiviteParDepartement = proDAO.findByDepartementAndActivite(ou, activite, "1");
+        	System.out.println("service dep: " + nbProParActiviteParDepartement);
+        	
+            dp.setNbPro(nbProParActiviteParDepartement);
+            if(dp.getPopulation() > 0) {
+            	double ratio = ((double)(nbProParActiviteParDepartement)) / ((double)dp.getPopulation()) * 1000; 
+	            dp.setRatio(ratio);
+	            System.out.println("ratio :" + ratio);
+            } else {
+            	dp.setRatio(0.123);
+            }
         } catch(Exception e){
         	e.printStackTrace();
         }
@@ -154,18 +165,32 @@ public class DataProServiceImpl implements DataProService {
         dp.setActivite(activite);
         dp.setOu(ou);
         
+        String ouTrouve = ou;
         try{
         	List<LightRefGeo> lstRefGeo = lightRefGeoDao.findByInseecode(ou);
         	if(lstRefGeo.size() > 0){
         		LightRefGeo refGeo = lstRefGeo.get(0);
         		dp.setPopulation(refGeo.getPopulation());
+        		
+        		if(refGeo.getName() != null){
+        			ouTrouve = refGeo.getName();
+        		}
         	} else {
         		System.out.println("Pas de lieu trouve pour le code insee : " + ou);
         		dp.setPopulation(10000);
         	}
-            
-            dp.setNbPro(10);
-            dp.setRatio(1.123);
+        	
+        	int nbProParActiviteParCommune = proDAO.findByCommuneAndActivite(ouTrouve, activite, "1");
+        	System.out.println("service commune: " + nbProParActiviteParCommune);
+        	
+            dp.setNbPro(nbProParActiviteParCommune);
+            if(dp.getPopulation() > 0) {
+            	double ratio = ((double)(nbProParActiviteParCommune)) / ((double)dp.getPopulation()) * 1000; 
+	            dp.setRatio(ratio);
+	            System.out.println("ratio :" + ratio);
+            } else {
+            	dp.setRatio(0.123);
+            }
         } catch(Exception e){
         	e.printStackTrace();
         }
