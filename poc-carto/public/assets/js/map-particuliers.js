@@ -113,6 +113,9 @@ function displayEnvironnement( oDatas )
 {
     //console.log( 'displayEnvironnement : '+oDatas );
 
+    // on supprime les span rating
+    $("span").remove(".rating");
+
     //Recentrage de la carte sur la localité choisie
     updateMap(  oDatas.refGeo );
 
@@ -172,7 +175,9 @@ function updateMap(  oRefGeo ){
 }
 
 function insertRating( sJqSelector ){
-    $(sJqSelector).remove('.rating');
+    console.log( sJqSelector );
+    // ne semble pas fonctionner
+    $(sJqSelector).remove(".rating");
     $( '<span class="rating"><span></span></span>' ).appendTo( sJqSelector );
 }
 
