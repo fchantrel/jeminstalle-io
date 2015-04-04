@@ -112,4 +112,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
+ 
+npm-debug.log
