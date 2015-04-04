@@ -1,6 +1,6 @@
 input {
    file {
-       path => [ "./couverture-4g.csv" ]
+       path => [ "/home/fchantrel/git/jeminstalle-io/data/couverture-4g-ok2.csv" ]
        start_position => "beginning"
        sincedb_path => "/dev/null"
    }
@@ -15,31 +15,31 @@ filter {
   else {
 
     csv {
-        columns => ['code-departement',
-          'nom-departement',
-          'code-region',
-          'couv-orange',
-          'couv-sfr',
-          'couv-bouygues',
-          'couv-free',
-          'surf-orange',
-          'surf-sfr',
-          'surf-bouygues',
-          'surf-free'
+        columns => ['codedepartement',
+          'nomdepartement',
+          'coderegion',
+          'couvorange',
+          'couvsfr',
+          'couvbouygues',
+          'couvfree',
+          'surforange',
+          'surfsfr',
+          'surfbouygues',
+          'surffree'
           ]
         separator => ";"
         remove_field => ['message','@version', '@timestamp', 'host', 'path','column12' ]
     }
 
     mutate {
-      convert => [ "couv-orange", "float" ]
-      convert => [ "couv-sfr", "float" ]
-      convert => [ "couv-bouygues", "float" ]
-      convert => [ "couv-free", "float" ]
-      convert => [ "surf-orange", "float" ]
-      convert => [ "surf-sfr", "float" ]
-      convert => [ "surf-bouygues", "float" ]
-      convert => [ "surf-free", "float" ]
+      convert => [ "couvorange", "float" ]
+      convert => [ "couvsfr", "float" ]
+      convert => [ "couvbouygues", "float" ]
+      convert => [ "couvfree", "float" ]
+      convert => [ "surforange", "float" ]
+      convert => [ "surfsfr", "float" ]
+      convert => [ "surfbouygues", "float" ]
+      convert => [ "surffree", "float" ]
     }
   }
 
@@ -47,14 +47,14 @@ filter {
 
 output {
 
-  #elasticsearch {
-  #  host => localhost
-  #  index => "jeminstalle"
-  #  index_type => "couverture_4g"
-  #  cluster => "cluster-dev-fch-1.4.4"
-  #}
-
-  stdout { 
-      codec => rubydebug
+  elasticsearch {
+    host => localhost
+    index => "jeminstalle"
+    index_type => "couverture_4g"
+    cluster => "cluster-dev-fch-1.4.4"
   }
+
+  #stdout { 
+  #    codec => rubydebug
+  #}
 }

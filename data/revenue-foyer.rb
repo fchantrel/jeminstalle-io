@@ -1,6 +1,6 @@
 input {
    file {
-       path => [ "./revenu_moyen_par_commune_2011.csv" ]
+       path => [ "/home/fchantrel/git/jeminstalle-io/data/revenu_moyen_par_commune_2011_ok2.csv" ]
        start_position => "beginning"
        sincedb_path => "/dev/null"
    }
@@ -15,8 +15,8 @@ filter {
   else {
 
     csv {
-        columns => ['code-insee',
-          'nom-commune',
+        columns => ['codeinsee',
+          'nomcommune',
           'a',
           'b',
           'c',
@@ -47,7 +47,7 @@ output {
     cluster => "cluster-dev-fch-1.4.4"
   }
 
-  stdout { 
-      codec => rubydebug
-  }
+  #stdout { 
+  #    codec => rubydebug
+  #}
 }
