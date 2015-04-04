@@ -1,7 +1,8 @@
 package io.jeminstalle.controller;
 
-import io.jeminstalle.domain.RefGeo;
+import io.jeminstalle.domain.LightRefGeo;
 import io.jeminstalle.service.RefGeoService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ public class RefGeoController {
 
 
     @RequestMapping(value = "/{name}", method = RequestMethod.GET)
-    public RefGeo getRefGeoByName(@PathVariable("name") String name) {
+    public LightRefGeo getRefGeoByName(@PathVariable("name") String name) {
         return refGeoService.getRefGeoByName(name);
     }
 

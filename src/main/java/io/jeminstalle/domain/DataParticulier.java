@@ -5,7 +5,7 @@ import java.util.List;
 
 public class DataParticulier {
 
-    private RefGeo refGeo;
+    private LightRefGeo refGeo;
     private Pollution pollution;
     private Couverture4G couverture4G;
     private RevenuMoyen revenuMoyen;
@@ -69,11 +69,11 @@ public class DataParticulier {
         this.boulangeries = boulangeries;
     }
 
-    public RefGeo getRefGeo() {
+    public LightRefGeo getRefGeo() {
         return refGeo;
     }
 
-    public void setRefGeo(RefGeo refGeo) {
+    public void setRefGeo(LightRefGeo refGeo) {
         this.refGeo = refGeo;
     }
 

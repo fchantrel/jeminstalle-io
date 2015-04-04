@@ -1,6 +1,6 @@
 package io.jeminstalle.service;
 
-import io.jeminstalle.domain.RefGeo;
+import io.jeminstalle.domain.LightRefGeo;
 
 /**
  * The Interface RefGeoService.
@@ -13,7 +13,7 @@ public interface RefGeoService {
      * @param communeName le nom de la commune
      * @return la ref geo
      */
-    RefGeo getRefGeoByName(String communeName);
+	LightRefGeo getRefGeoByName(String communeName);
 
 
 }

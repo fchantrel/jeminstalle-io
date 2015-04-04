@@ -19,10 +19,21 @@ public class Precipitation {
 
 
     public void convertirEnMm() {
-        double metreCubeEauParKMMetreCarreSurface = Double.valueOf(precipitation) / 5000; // surface moyenne departement
-        double metreCubeEauParMetreCarre = metreCubeEauParKMMetreCarreSurface / (1000 * 1000);
-        double litreEauParMetreCarre = metreCubeEauParMetreCarre * 1000;
-        precipitation = String.valueOf(Math.round(litreEauParMetreCarre));
+    	
+    	if(precipitation == null) {
+        	precipitation = "";
+    	} else {
+        	try {
+        		double metreCubeEauParKMMetreCarreSurface = Double.valueOf(precipitation) / 5000; // surface moyenne departement
+                double metreCubeEauParMetreCarre = metreCubeEauParKMMetreCarreSurface / (1000 * 1000);
+                double litreEauParMetreCarre = metreCubeEauParMetreCarre * 1000;
+                precipitation = String.valueOf(Math.round(litreEauParMetreCarre));
+        	} catch(Exception e){
+        		System.out.println("Impossible de convertir les precipitations en mm : " + precipitation);
+        		precipitation = "";
+        	}
+    	}
+
     }
 
 

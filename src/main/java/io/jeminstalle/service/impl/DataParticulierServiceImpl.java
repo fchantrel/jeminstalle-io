@@ -1,12 +1,29 @@
 package io.jeminstalle.service.impl;
 
-import io.jeminstalle.dao.*;
-import io.jeminstalle.domain.*;
+import io.jeminstalle.dao.Couverture4GDAO;
+import io.jeminstalle.dao.EnsoleillementDAO;
+import io.jeminstalle.dao.LightRefGeoDao;
+import io.jeminstalle.dao.NucleaireDAO;
+import io.jeminstalle.dao.PollutionDAO;
+import io.jeminstalle.dao.PrecipitationDAO;
+import io.jeminstalle.dao.ProDAO;
+import io.jeminstalle.dao.RevenuMoyenDAO;
+import io.jeminstalle.dao.StarbusDAO;
+import io.jeminstalle.domain.Couverture4G;
+import io.jeminstalle.domain.DataParticulier;
+import io.jeminstalle.domain.Ensoleillement;
+import io.jeminstalle.domain.LightRefGeo;
+import io.jeminstalle.domain.Nucleaire;
+import io.jeminstalle.domain.Pollution;
+import io.jeminstalle.domain.Precipitation;
+import io.jeminstalle.domain.RevenuMoyen;
+import io.jeminstalle.domain.Starbus;
 import io.jeminstalle.service.DataParticulierService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by raphael on 31/03/2015.
@@ -15,7 +32,8 @@ import java.util.List;
 public class DataParticulierServiceImpl implements DataParticulierService {
 
     @Autowired
-    private RefGeoDao refGeoDao;
+    private LightRefGeoDao refGeoDao;
+    //private RefGeoDao refGeoDao;
 
     @Autowired
     private PollutionDAO pollutionDAO;
@@ -42,25 +60,34 @@ public class DataParticulierServiceImpl implements DataParticulierService {
     private ProDAO proDAO;
 
     //FIXME
-    private RefGeo getRefGeoContainsZipCodeOnly(List<RefGeo> refGeoList) {
-        for (RefGeo refGeo : refGeoList) {
+    private LightRefGeo getRefGeoContainsZipCodeOnly(List<LightRefGeo> refGeoList) {
+        for (LightRefGeo refGeo : refGeoList) {
             if (refGeo.getZipcode() != null) {
                 return refGeo;
             }
         }
         // FIXME
-        RefGeo rg = refGeoList.get(0);
-        rg.setZipcode("75000");
+        LightRefGeo rg = null;
+        if((refGeoList != null)&&(refGeoList.size() > 0)){
+        	rg = refGeoList.get(0);
+        	rg.setZipcode("75000");
+        }
+        
         return rg;
     }
 
     @Override
     public DataParticulier getDataParticulierByName(String name) {
 
-        List<RefGeo> refGeos = refGeoDao.findByName(name);
-        RefGeo refGeo = getRefGeoContainsZipCodeOnly(refGeos);
-
-        DataParticulier dp = getDataParticulier(refGeo, name, refGeo.getLatitude(), refGeo.getLongitude());
+        List<LightRefGeo> refGeos = refGeoDao.findByName(name);
+        LightRefGeo refGeo = getRefGeoContainsZipCodeOnly(refGeos);
+        
+        DataParticulier dp = new DataParticulier();
+        if(refGeo == null) {
+        	System.out.println("Lieu non trouve pour la chaine saisie : " + name);
+        } else {
+        	dp = getDataParticulier(refGeo, name, refGeo.getLatitude(), refGeo.getLongitude());
+        }
 
         return dp;
     }
@@ -69,8 +96,8 @@ public class DataParticulierServiceImpl implements DataParticulierService {
     @Override
     public DataParticulier getDataParticulierByPosition(String latitude, String longitude) {
 
-        List<RefGeo> refGeos = refGeoDao.findByLatitudeAndLongitude(Float.valueOf(latitude), Float.valueOf(longitude));
-        RefGeo refGeo = getRefGeoContainsZipCodeOnly(refGeos);
+        List<LightRefGeo> refGeos = refGeoDao.findByLatitudeAndLongitude(Float.valueOf(latitude), Float.valueOf(longitude));
+        LightRefGeo refGeo = getRefGeoContainsZipCodeOnly(refGeos);
 
         DataParticulier dp = getDataParticulier(refGeo, refGeo.getName(), refGeo.getLatitude(), refGeo.getLongitude());
 
@@ -78,20 +105,41 @@ public class DataParticulierServiceImpl implements DataParticulierService {
     }
 
 
-    private DataParticulier getDataParticulier(RefGeo refGeo, String commune, float latitude, float longitude) {
+    private DataParticulier getDataParticulier(LightRefGeo refGeo, String commune, float latitude, float longitude) {
 
-        String distanceKM = "12";
-        String maxResultat = "10";
+        String distanceKM = "5";
+        String maxResultat = "30";
 
 
         String departement = refGeo.getZipcode().substring(0, 2);
 
         DataParticulier dp = new DataParticulier();
 
-        Pollution pollution = pollutionDAO.findByNodepartement(departement).get(0);
+        Pollution pollution = new Pollution();
+        try{
+            pollution = pollutionDAO.findByNodepartement(departement).get(0);
+        } catch(Exception e){
+        	pollution = new Pollution();
+        	System.out.println("Pollution non trouvée pour le departement : " + departement);
+        }
+
         Couverture4G couverture4G = couverture4GDAO.findByCodedepartement(departement);
-        Ensoleillement ensoleillement = ensoleillementDAO.findByNodepartement(departement);
-        RevenuMoyen revenuMoyen = revenuMoyenDAO.findByNomcommune(commune).get(0);
+        
+        Ensoleillement ensoleillement = new Ensoleillement();
+        try{
+        	ensoleillement = ensoleillementDAO.findByNodepartement(departement);
+        } catch(Exception e){
+        	pollution = new Pollution();
+        	System.out.println("Ensoleillement non trouvée pour le departement : " + departement);
+        }
+        
+        RevenuMoyen revenuMoyen = new RevenuMoyen();
+        try{
+        	revenuMoyen = revenuMoyenDAO.findByNomcommune(commune).get(0);
+        } catch(Exception e){
+        	System.out.println("RevenuMoyen non trouvée pour departement : " + departement);
+        }
+        
         Precipitation precipitation = precipitationDAO.findByNodepartement(departement);
         Nucleaire nucleaire = nucleaireDAO.findByNumdep(departement);
 
@@ -101,17 +149,20 @@ public class DataParticulierServiceImpl implements DataParticulierService {
         dp.setPollution(pollution);
         dp.setCouverture4G(couverture4G);
         dp.setRevenuMoyen(revenuMoyen);
-        precipitation.convertirEnMm();
+        if(precipitation != null){
+        	precipitation.convertirEnMm();
+        } else {
+        	System.out.println("Precipitations non trouvé pour le departement : " + departement);
+        }
+        
         dp.setPrecipitation(precipitation);
         dp.setNucleaire(nucleaire);
         dp.setEnsoleillement(ensoleillement);
-
 
         String boulangeriesJSON = proDAO.findByCoordonneesAndRubrique(String.valueOf(latitude), String.valueOf(longitude), "boulangerie", distanceKM, maxResultat);
         String pharmacieJSON = proDAO.findByCoordonneesAndRubrique(String.valueOf(latitude), String.valueOf(longitude), "pharmacie", distanceKM, maxResultat);
         String barJSON = proDAO.findByCoordonneesAndRubrique(String.valueOf(latitude), String.valueOf(longitude), "bar", distanceKM, maxResultat);
         String ecoleJSON = proDAO.findByCoordonneesAndRubrique(String.valueOf(latitude), String.valueOf(longitude), "ecole primaire", distanceKM, maxResultat);
-
 
         dp.setBoulangeries(boulangeriesJSON);
         dp.setPharmacies(pharmacieJSON);

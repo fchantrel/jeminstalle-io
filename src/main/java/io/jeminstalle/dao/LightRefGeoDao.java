@@ -1,6 +1,7 @@
 package io.jeminstalle.dao;
 
 import io.jeminstalle.domain.LightRefGeo;
+
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 import java.util.List;
@@ -12,5 +13,10 @@ public interface LightRefGeoDao extends ElasticsearchRepository<LightRefGeo, Str
 
     // FIXME : réussir à faire un size=1 (top et first ne fonctionnent pas)
     List<LightRefGeo> findByInseecode(String name);
+    
+    // FIXME : réussir à faire un size=1 (top et first ne fonctionnent pas)
+    List<LightRefGeo> findByName(String name);
+
+    List<LightRefGeo> findByLatitudeAndLongitude(float latitude, float longitude);
     
 }
