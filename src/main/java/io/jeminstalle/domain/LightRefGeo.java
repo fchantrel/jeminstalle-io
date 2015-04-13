@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
  * Created by fchantrel on 31/03/2015.
  * Index ne contenant pas les adresses.
  */
-@Document(indexName = "jeminstalle_geo-insee", type = "ref_geo")
+@Document(indexName = "jeminstalle_insee_geo", type = "ref_geo")
 public class LightRefGeo {
 
     private String timestamp;

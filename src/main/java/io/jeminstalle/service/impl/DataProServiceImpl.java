@@ -12,17 +12,22 @@ import io.jeminstalle.domain.DataPro;
 import io.jeminstalle.domain.LightRefGeo;
 import io.jeminstalle.service.DataProService;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.metrics.CounterService;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Service;
 
 /**
  * Created by fchantrel on 31/03/2015.
  */
 @Service
+@EnableAutoConfiguration
 public class DataProServiceImpl implements DataProService {
+	
+	@Autowired
+	private CounterService counterService;
 
     @Autowired
     private LightRefGeoDao lightRefGeoDao;
@@ -45,12 +50,13 @@ public class DataProServiceImpl implements DataProService {
     @Autowired
     private NucleaireDAO nucleaireDAO;
 
-
     @Autowired
     private ProDAO proDAO;
-
+        
     @Override
     public DataPro getDataPro(String activite, String ou) {
+    	
+    	counterService.increment("counter.calls.getDataPro");
 
         DataPro dp = new DataPro();
         dp.setActivite(activite);
@@ -90,6 +96,8 @@ public class DataProServiceImpl implements DataProService {
 
 	@Override
 	    public DataPro getDataProByRegion(String activite, String ou) {
+		
+			counterService.increment("counter.calls.getDataProByRegion");
 	
 	        DataPro dp = new DataPro();
 	        dp.setActivite(activite);
@@ -124,6 +132,8 @@ public class DataProServiceImpl implements DataProService {
 	@Override
     public DataPro getDataProByDepartement(String activite, String ou) {
 
+		counterService.increment("counter.calls.getDataProByDepartement");
+		
         DataPro dp = new DataPro();
         dp.setActivite(activite);
         dp.setOu(ou);
@@ -156,6 +166,8 @@ public class DataProServiceImpl implements DataProService {
 	
 	@Override
     public DataPro getDataProByCommune(String activite, String ou) {
+		
+		counterService.increment("counter.calls.getDataProByCommune");
 
         DataPro dp = new DataPro();
         dp.setActivite(activite);

@@ -18,14 +18,14 @@ public class ProDAOImpl implements ProDAO {
     public String findByCoordonneesAndRubrique(String latitude, String longitude, String rubrique, String distanceKM, String maxResultat) {
 
         String s = "{ \"query\": { \"multi_match\": { \"query\": \"" + rubrique + "\", \"fields\": [ \"epj.denom\", \"parutions.parutionrubriques.rubrique.content^10\"] } }, \"filter\": { \"geo_distance\" : { \"distance\" : \"" + distanceKM + "km\", \"proGeoCoord\" : { \"lat\" : " + latitude + ", \"lon\" : " + longitude + " } } } } ";
-        String retour = restTemplate.postForObject("http://" + IP.IP + ":9200/slev8epj/blocsepj/_search?size=" + maxResultat, s, String.class);
+        String retour = restTemplate.postForObject("http://" + IP.IP + ":9201/slev8epj/blocsepj/_search?size=" + maxResultat, s, String.class);
         return retour;
     }
 
     @Override
     public int findByRegionAndActivite(String region, String activite, String maxResultat) {
         String s = "{\"query\": {\"bool\": {\"must\": [{\"multi_match\": {\"query\":\"" + activite + "\",\"fields\": [\"epj.denom\",\"epj.cpldenom\",\"parutions.parutionrubriques.rubrique.content\"]}},{\"multi_match\": {\"query\":\"" + region + "\",\"fields\": [\"parutions.parutionrubriques.pjreg\"]}}]}}}";
-        DenombrementES retour = restTemplate.postForObject("http://" + IP.IP + ":9200/slev8epj/blocsepj/_count", s, DenombrementES.class);
+        DenombrementES retour = restTemplate.postForObject("http://" + IP.IP + ":9201/slev8epj/blocsepj/_count", s, DenombrementES.class);
 
         return retour.getCount();
     }
@@ -35,7 +35,7 @@ public class ProDAOImpl implements ProDAO {
 
         String codeDepartement = "0" + departement;
         String s = "{\"query\": {\"bool\": {\"must\": [{\"multi_match\": {\"query\":\"" + activite + "\",\"fields\": [\"epj.denom\",\"epj.cpldenom\",\"parutions.parutionrubriques.rubrique.content\"]}},{\"multi_match\": {\"query\":\"" + codeDepartement + "\",\"fields\": [\"parutions.parutionrubriques.pjdep\"]}}]}}}";
-        DenombrementES retour = restTemplate.postForObject("http://" + IP.IP + ":9200/slev8epj/blocsepj/_count", s, DenombrementES.class);
+        DenombrementES retour = restTemplate.postForObject("http://" + IP.IP + ":9201/slev8epj/blocsepj/_count", s, DenombrementES.class);
 
         return retour.getCount();
     }
@@ -51,7 +51,7 @@ public class ProDAOImpl implements ProDAO {
         String s = "{\"query\": {\"bool\": {\"must\": [{\"multi_match\": {\"query\":\"" + activite + "\",\"fields\": [\"epj.denom\",\"epj.cpldenom\",\"parutions.parutionrubriques.rubrique.content\"]}},{\"multi_match\": {\"query\":\"" + communeFormatee + "\",\"fields\": [\"epj.libloc\"]}}]}}}";
         DenombrementES retour = new DenombrementES();
         try {
-            retour = restTemplate.postForObject("http://" + IP.IP + ":9200/slev8epj/blocsepj/_count", s, DenombrementES.class);
+            retour = restTemplate.postForObject("http://" + IP.IP + ":9201/slev8epj/blocsepj/_count", s, DenombrementES.class);
         } catch (Exception e) {
             System.out.println("Libelle commune : " + communeFormatee);
             System.out.println("Requete : " + s);
