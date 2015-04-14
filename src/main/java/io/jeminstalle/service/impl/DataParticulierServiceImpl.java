@@ -80,16 +80,12 @@ public class DataParticulierServiceImpl implements DataParticulierService {
     public DataParticulier getDataParticulierByName(String name) {
 
         List<LightRefGeo> refGeos = refGeoDao.findByName(name);
-        System.out.println("ICI 1");
         LightRefGeo refGeo = getRefGeoContainsZipCodeOnly(refGeos);
-        System.out.println("ICI 2");
         DataParticulier dp = new DataParticulier();
         if(refGeo == null) {
         	System.out.println("Lieu non trouve pour la chaine saisie : " + name);
         } else {
-        	System.out.println("ICI 3");
         	dp = getDataParticulier(refGeo, name, refGeo.getLatitude(), refGeo.getLongitude());
-        	System.out.println("ICI 4");
         }
 
         return dp;
@@ -113,13 +109,11 @@ public class DataParticulierServiceImpl implements DataParticulierService {
         String distanceKM = "5";
         String maxResultat = "30";
 
-
         String departement = refGeo.getZipcode().substring(0, 2);
 
         DataParticulier dp = new DataParticulier();
 
         Pollution pollution = new Pollution();
-        System.out.println("ICI 5");
         try{
             pollution = pollutionDAO.findByNodepartement(departement).get(0);
         } catch(Exception e){
@@ -127,10 +121,8 @@ public class DataParticulierServiceImpl implements DataParticulierService {
         	System.out.println("Pollution non trouvée pour le departement : " + departement);
         }
 
-        System.out.println("ICI 6");
         Couverture4G couverture4G = couverture4GDAO.findByCodedepartement(departement);
         
-        System.out.println("ICI 7");
         Ensoleillement ensoleillement = new Ensoleillement();
         try{
         	ensoleillement = ensoleillementDAO.findByNodepartement(departement);
@@ -139,7 +131,6 @@ public class DataParticulierServiceImpl implements DataParticulierService {
         	System.out.println("Ensoleillement non trouvée pour le departement : " + departement);
         }
         
-        System.out.println("ICI 8");
         RevenuMoyen revenuMoyen = new RevenuMoyen();
         try{
         	revenuMoyen = revenuMoyenDAO.findByNomcommune(commune).get(0);
@@ -147,20 +138,16 @@ public class DataParticulierServiceImpl implements DataParticulierService {
         	System.out.println("RevenuMoyen non trouvée pour departement : " + departement);
         }
         
-        System.out.println("ICI 9");
         Precipitation precipitation = precipitationDAO.findByNodepartement(departement);
         
-        System.out.println("ICI 10");
         Nucleaire nucleaire = nucleaireDAO.findByNumdep(departement);
 
-        System.out.println("ICI 11");
         try{
             List<Starbus> starbuses = starbusDAO.findByLatitudeAndLongitude(latitude, longitude, distanceKM);
             dp.getStarbuses().addAll(starbuses);
         } catch (Exception e){
         	e.printStackTrace();
         }
-        System.out.println("ICI 12");                
         dp.setPollution(pollution);
         dp.setCouverture4G(couverture4G);
         dp.setRevenuMoyen(revenuMoyen);

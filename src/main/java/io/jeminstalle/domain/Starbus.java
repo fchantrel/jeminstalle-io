@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 /**
  * Created by raphael on 31/03/2015.
  */
-@Document(indexName = "jeminstalle", type = "starbus2")
+@Document(indexName = "jeminstalle", type = "starbus")
 public class Starbus {
 
     @Id

@@ -2,12 +2,19 @@ package io.jeminstalle.controller;
 
 import io.jeminstalle.domain.Lieu;
 import io.jeminstalle.service.LieuService;
+
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
+import com.codahale.metrics.annotation.Timed;
 
 /**
  * Classe LieuController.
@@ -28,6 +35,7 @@ public class LieuController {
      * @return the all Lieux
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
+    @Timed
     public Collection<Lieu> getAllLieux() {
         return LieuService.getAllLieux();
     }
@@ -50,6 +58,7 @@ public class LieuController {
      * @return the collection
      */
     @RequestMapping(value = "/ville/{nom}", method = RequestMethod.GET)
+    @Timed
     public Collection<Lieu> findLieuxByNom(@PathVariable("nom") String nomVille) {
         return LieuService.findLieuxByNom(nomVille);
     }
@@ -61,6 +70,7 @@ public class LieuController {
      * @return the Lieu
      */
     @RequestMapping(value = "/", method = RequestMethod.POST, consumes = "application/json")
+    @Timed
     public Lieu addLieu(@RequestBody Lieu Lieu) {
         return LieuService.addLieu(Lieu);
     }
@@ -72,6 +82,7 @@ public class LieuController {
      * @return the response entity
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @Timed
     public ResponseEntity<String> deleteLieu(@PathVariable("id") Long id) {
 
         LieuService.deleteLieu(id);
@@ -80,6 +91,7 @@ public class LieuController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @Timed
     public Lieu updateLieu(@PathVariable("id") Long id, @RequestBody Lieu Lieu) {
 
         return LieuService.updateLieu(id, Lieu);

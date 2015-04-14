@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.codahale.metrics.annotation.Timed;
+
 
 @RestController("RefGeoController")
 @RequestMapping(value = "/refgeo")
@@ -19,6 +21,7 @@ public class RefGeoController {
 
 
     @RequestMapping(value = "/{name}", method = RequestMethod.GET)
+    @Timed
     public LightRefGeo getRefGeoByName(@PathVariable("name") String name) {
         return refGeoService.getRefGeoByName(name);
     }
