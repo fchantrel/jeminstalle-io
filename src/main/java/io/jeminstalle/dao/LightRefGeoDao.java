@@ -4,6 +4,8 @@ import io.jeminstalle.domain.LightRefGeo;
 
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
+import com.codahale.metrics.annotation.Timed;
+
 import java.util.List;
 
 /**
@@ -12,11 +14,14 @@ import java.util.List;
 public interface LightRefGeoDao extends ElasticsearchRepository<LightRefGeo, String> {
 
     // FIXME : réussir à faire un size=1 (top et first ne fonctionnent pas)
+	@Timed
     List<LightRefGeo> findByInseecode(String name);
     
     // FIXME : réussir à faire un size=1 (top et first ne fonctionnent pas)
-    List<LightRefGeo> findByName(String name);
+	@Timed
+	List<LightRefGeo> findByName(String name);
 
+	@Timed
     List<LightRefGeo> findByLatitudeAndLongitude(float latitude, float longitude);
     
 }

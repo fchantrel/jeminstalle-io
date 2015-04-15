@@ -2,12 +2,15 @@ package io.jeminstalle.dao.impl;
 
 import io.jeminstalle.dao.StarbusDAO;
 import io.jeminstalle.domain.Starbus;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 import org.springframework.data.elasticsearch.core.query.Criteria;
 import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 import org.springframework.stereotype.Service;
+
+import com.codahale.metrics.annotation.Timed;
 
 import java.util.List;
 
@@ -22,6 +25,7 @@ public class StarbusDAOImpl implements StarbusDAO {
 
 
     @Override
+    @Timed
     public List<Starbus> findByLatitudeAndLongitude(double latitude, double longitude, String amplitude) {
 
         CriteriaQuery geoLocationCriteriaQuery = new CriteriaQuery(

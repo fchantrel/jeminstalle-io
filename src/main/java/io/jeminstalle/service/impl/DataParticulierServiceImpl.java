@@ -25,6 +25,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codahale.metrics.annotation.Timed;
+
 /**
  * Created by raphael on 31/03/2015.
  */
@@ -33,7 +35,6 @@ public class DataParticulierServiceImpl implements DataParticulierService {
 
     @Autowired
     private LightRefGeoDao refGeoDao;
-    //private RefGeoDao refGeoDao;
 
     @Autowired
     private PollutionDAO pollutionDAO;
@@ -77,6 +78,7 @@ public class DataParticulierServiceImpl implements DataParticulierService {
     }
 
     @Override
+    @Timed(name="DataParticulierServiceImpl.getDataParticulierByName")
     public DataParticulier getDataParticulierByName(String name) {
 
         List<LightRefGeo> refGeos = refGeoDao.findByName(name);
@@ -93,6 +95,7 @@ public class DataParticulierServiceImpl implements DataParticulierService {
 
 
     @Override
+    @Timed(name="DataParticulierServiceImpl.getDataParticulierByPosition")
     public DataParticulier getDataParticulierByPosition(String latitude, String longitude) {
 
         List<LightRefGeo> refGeos = refGeoDao.findByLatitudeAndLongitude(Float.valueOf(latitude), Float.valueOf(longitude));
