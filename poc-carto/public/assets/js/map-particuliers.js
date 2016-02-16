@@ -4,12 +4,14 @@ var map = L.map('map').setView([47.07, 2.37], 6);
 
 //------------------------------------------------------
 // Définition du FOND DE CARTE
-L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+var mapboxAccessToken = 'pk.eyJ1IjoiZmNoYW50cmVsIiwiYSI6ImNpa3B3d2lhbjE0b290eWo3dnhmNjg2czAifQ.6wQ7VASiTx3HBGWN-MCnUw';
+
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxAccessToken, {
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
             '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
             'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        id: 'examples.map-20v6611k'
+        id: 'mapbox.light'
     }).addTo(map);
 
 //======================================================================================
